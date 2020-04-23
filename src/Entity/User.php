@@ -168,7 +168,8 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
-        return $this->roles;
+        //return $this->roles;
+        return ['ROLE_USER'];
     }
 
     /**
@@ -181,6 +182,8 @@ class User implements UserInterface
 
     /**
      * @inheritDoc
+     *
+     * @codeCoverageIgnore
      */
     public function getSalt()
     {
@@ -189,6 +192,8 @@ class User implements UserInterface
 
     /**
      * @inheritDoc
+     *
+     * @codeCoverageIgnore
      */
     public function eraseCredentials()
     {
