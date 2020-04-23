@@ -15,4 +15,5 @@ composer.phar
 .phpunit
 .phpunit.result.cache
 /phpunit.xml
+/build/
 ###< symfony/phpunit-bridge ###
