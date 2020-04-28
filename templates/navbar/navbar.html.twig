@@ -1,0 +1,74 @@
+{#<nav class="navbar navbar-expand-lg navbar-light fixed-top background-nav">#}
+{#    <div class="container">#}
+{#        <a style="color: darkblue" class="navbar-brand" href="/">To Do List</a>#}
+{#        <a href="/"><img src="{{ asset('img/new_logo_oc.jpg') }}" alt="OpenClassrooms"/></a>#}
+{#        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">#}
+{#            <span class="navbar-toggler-icon"></span>#}
+{#        </button>#}
+
+{#        <div class="collapse navbar-collapse" id="navbarColor03">#}
+{#            <ul class="navbar-nav mr-auto">#}
+{#                {% if is_granted('ROLE_ADMIN') %}#}
+{#                    <li>#}
+{#                        <a style="color: darkblue" class="nav-link" href="">Gérer les utilisateurs</a>#}
+{#                    </li>#}
+{#                {% endif %}#}
+{#                <li>#}
+{#                    <a style="color: white" class="nav-link btn btn-primary" href="">Créer un utilisateur</a>#}
+{#                </li>#}
+{#                <li>#}
+{#                    {% if app.user %}#}
+{#                        <a style="color: white" class="nav-link btn btn-danger" href="">Se déconnecter</a>#}
+{#                    {% endif %}#}
+{#                </li>#}
+{#            </ul>#}
+{#        </div>#}
+{#    </div>#}
+{#</nav>#}
+
+<div id="navbar-top">
+    <nav class="navbar navbar-expand-md navbar-light bg-white fixed" {{ app.session.flashbag.peek('success')|length > 0 ? '' : 'mb-5' }}>
+        <div class="container">
+            <a href="/"><img src="{{ asset('img/new_logo_oc.jpg') }}" alt="OpenClassrooms"/></a>
+            <a style="color: darkblue" class="navbar-brand nav-link" href="/">To do list</a>
+            <button class="navbar-toggler" type="button"
+                    data-toggle="collapse" data-target="#nav" aria-controls="nav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="nav">
+                <ul class="navbar-nav ml-auto">
+                    {% if is_granted("ROLE_USER")%}
+                        <li class="nav-item dropdown">
+{#                            <a class="nav-link dropdown-toggle" href=""#}
+{#                               id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+{#                                {% if app.user.avatar is not null%}#}
+{#                                    <img src="" class="img-circle" alt="">#}
+{#                                {% else %}#}
+{#                                    <img src="" class="img-circle" alt="">#}
+{#                                {% endif %}#}
+{#                                {{ app.user.username }}#}
+{#                            </a>#}
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="/"><i class="fa fa-home" aria-hidden="true"></i> Accueil</a>
+                                <a class="dropdown-item" href="">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                    Gérer les utilisateurs
+                                </a>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a style="color: darkblue" class="nav-link" href="">Créer un utilisateur</a>
+                        </li>
+                    {% endif %}
+                        <li>
+                            {% if app.user %}
+                                <a style="color: white" class="nav-link btn btn-danger" href="">Se déconnecter</a>
+                            {% endif %}
+                        </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>

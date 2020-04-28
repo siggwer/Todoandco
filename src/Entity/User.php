@@ -32,7 +32,7 @@ class User implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=64, nullable=false)
+     * @ORM\Column(type="string", nullable=false)
      *
      * @Assert\Length(
      *     min="6",

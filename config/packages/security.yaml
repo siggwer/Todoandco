@@ -15,11 +15,19 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
+            anonymous: ~
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
+#            form_login:
+#                login_path: /login
+#                check_path: /login_check
+#                csrf_token_generator: security.csrf.token_manager
+#                always_use_default_target_path: true
+#                default_target_path:  /
             logout:
                 path: /logout
                 target: /
-
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 
@@ -31,3 +39,11 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY , methods: [GET, POST]}
+        - { path: ^/users/create, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: [GET, POST]}
+        - { path: ^/tasks, roles: ROLE_USER, methods: [GET, POST]}
+        - { path: ^/users, roles: ROLE_ADMIN, methods: [GET, POST] }
+        - { path: ^/user, roles: ROLE_ADMIN, methods: [GET, POST] }
+        - { path: ^/delete, roles: ROLE_ADMIN, methods: [GET]}
+        - { path: /tasks-Is-Done, roles: ROLE_USER, methods: [GET]}
+        - { path: ^/, roles: ROLE_USER, methods: [GET] }
