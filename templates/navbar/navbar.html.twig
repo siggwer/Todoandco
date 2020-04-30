@@ -27,7 +27,7 @@
 {#</nav>#}
 
 <div id="navbar-top">
-    <nav class="navbar navbar-expand-md navbar-light bg-white fixed" {{ app.session.flashbag.peek('success')|length > 0 ? '' : 'mb-5' }}>
+    <nav class="navbar navbar-expand-md navbar-light bg-white fixed-top background-nav" {{ app.session.flashbag.peek('success')|length > 0 ? '' : 'mb-5' }}>
         <div class="container">
             <a href="/"><img src="{{ asset('img/new_logo_oc.jpg') }}" alt="OpenClassrooms"/></a>
             <a style="color: darkblue" class="navbar-brand nav-link" href="/">To do list</a>
@@ -38,7 +38,7 @@
             </button>
             <div class="collapse navbar-collapse" id="nav">
                 <ul class="navbar-nav ml-auto">
-                    {% if is_granted("ROLE_USER")%}
+                    {% if is_granted("ROLE_ADMIN")%}
                         <li class="nav-item dropdown">
 {#                            <a class="nav-link dropdown-toggle" href=""#}
 {#                               id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
@@ -51,7 +51,7 @@
 {#                            </a>#}
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="/"><i class="fa fa-home" aria-hidden="true"></i> Accueil</a>
-                                <a class="dropdown-item" href="">
+                                <a class="dropdown-item" href="{{ path('user_list') }}">
                                     <i class="fa fa-user" aria-hidden="true"></i>
                                     Gérer les utilisateurs
                                 </a>
@@ -64,7 +64,7 @@
                     {% endif %}
                         <li>
                             {% if app.user %}
-                                <a style="color: white" class="nav-link btn btn-danger" href="">Se déconnecter</a>
+                                <a style="color: white" class="nav-link btn btn-danger" href="{{ path('security_logout') }}">Se déconnecter</a>
                             {% endif %}
                         </li>
                 </ul>

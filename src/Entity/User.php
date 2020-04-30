@@ -76,6 +76,7 @@ class User implements UserInterface
 
     /**
      * User constructor.
+     *
      * @throws Exception
      */
     public function __construct()
@@ -168,8 +169,8 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
-        //return $this->roles;
-        return ['ROLE_USER'];
+        return $this->roles;
+        //return ['ROLE_USER'];
     }
 
     /**

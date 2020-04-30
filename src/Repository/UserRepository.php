@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -17,6 +19,39 @@ class UserRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
+    }
+
+    /**
+     * @param $user
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function userSave($user)
+    {
+        $this->_em->persist($user);
+        $this->_em->flush();
+    }
+
+    /**
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function userUpdate()
+    {
+        $this->_em->flush();
+    }
+
+    /**
+     * @param $user
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function userDelete($user)
+    {
+        $this->_em->remove($user);
+        $this->_em->flush();
     }
 
     // /**
