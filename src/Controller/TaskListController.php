@@ -4,23 +4,23 @@ namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
-use App\Repository\UserRepository;
+use App\Repository\TaskRepository;
 use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
 use Twig\Error\LoaderError;
+use Twig\Error\SyntaxError;
 use Twig\Environment;
 
 /**
- * Class UserListController
+ * Class TaskListController
  *
  * @package App\Controller
  */
-class UserListController
+class TaskListController
 {
     /**
-     * @Route(path="/users/list", name="user_list", methods={"GET"})
+     * @Route(path="/tasks/list", name="task_list", methods={"GET"})
      *
-     * @param UserRepository $repository
+     * @param TaskRepository $repository
      * @param Environment $twig
      *
      * @return Response
@@ -29,13 +29,14 @@ class UserListController
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function listUser(UserRepository $repository, Environment $twig)
+    public function tasksList(TaskRepository $repository, Environment $twig)
     {
-        $user = $repository->findAll();
+        $tasks = $repository->listTask();
 
         return new Response(
-            $twig->render('user/list.html.twig', [
-                'users' => $user
+            $twig->render(
+                'task/list.html.twig', [
+                    'tasks' => $tasks
                 ]
             ), Response::HTTP_OK
         );

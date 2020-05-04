@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Task;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -17,6 +19,53 @@ class TaskRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Task::class);
+    }
+
+    /**
+     * @return int|mixed|string
+     */
+    public function listTask()
+    {
+        return $this->createQueryBuilder('t')
+            ->orderBy('t.createdAt', 'DESC')
+            ->getQuery()
+            ->useResultCache(true)
+            ->setQueryCacheLifetime(60)
+            ->setResultCacheId('tasks')
+            ->getResult();
+    }
+
+    /**
+     * @param $task
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function save($task)
+    {
+        $this->_em->persist($task);
+        $this->_em->flush();
+    }
+
+    /**
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function update()
+    {
+        $this->_em->flush();
+    }
+
+    /**
+     * @param $task
+     *
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function delete($task)
+    {
+        $this->_em->remove($task);
+        $this->_em->flush();
     }
 
     // /**
