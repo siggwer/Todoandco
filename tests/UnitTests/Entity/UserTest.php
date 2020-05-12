@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Entity;
+namespace App\Tests\UnitTests\Entity;
 
 use PHPUnit\Framework\TestCase;
 use App\Entity\Traits\Idtrait;
@@ -40,10 +40,7 @@ class UserTest extends TestCase
     {
         $user = new UserTest();
         $this->assertNull($user->getId());
-        try {
-            $reflecion = new ReflectionClass($user);
-        } catch (ReflectionException $e) {
-        }
+        $reflecion = new ReflectionClass($user);
         $property = $reflecion->getProperty('id');
         $property->setAccessible(true);
         $property->setValue($user, '1');
@@ -80,16 +77,6 @@ class UserTest extends TestCase
         $this->assertEquals('sfJDLKSmdlfsmdlfjlmskDFLMsdjflmSDFLMlm', $result);
     }
 
-//    /**
-//     *
-//     */
-//    public function testGetPasswordToken()
-//    {
-//        $this->user->setPasswordToken('qsùdqSDKùmsd%MSDKLQù');
-//        $result = $this->user->getPasswordToken();
-//        $this->assertEquals('qsùdqSDKùmsd%MSDKLQù', $result);
-//    }
-
     /**
      * @throws Exception
      */
@@ -100,41 +87,6 @@ class UserTest extends TestCase
         $this->assertInstanceOf(DateTimeImmutable::class, $result);
     }
 
-//    /**
-//     *
-//     */
-//    public function testGetAvatar()
-//    {
-//        $this->user->setAvatar(new Picture());
-//        $result = $this->user->getAvatar();
-//        $this->assertInstanceOf(Picture::class, $result);
-//    }
-
-//    /**
-//     *
-//     */
-//    public function testGetUploadedFile()
-//    {
-//        $this->user->setUploadedFile(
-//            new UploadedFile(
-//                'public/images/image.png',
-//                '%kernel.project_dir%/public/uploads'
-//            )
-//        );
-//        $result = $this->user->getUploadedFile();
-//        $this->assertInstanceOf(UploadedFile::class, $result);
-//    }
-
-//    /**
-//     *
-//     */
-//    public function testGetToken()
-//    {
-//        $this->user->setToken('lmqsdkqqSDLMQdlùqSLQ');
-//        $result = $this->user->getToken();
-//        $this->assertEquals('lmqsdkqqSDLMQdlùqSLQ', $result);
-//    }
-
     /**
      *
      */
@@ -142,17 +94,7 @@ class UserTest extends TestCase
     {
         $task = new Task();
         $this->user->setTask($task);
-        static::assertSame($task, $this->user->getTask());
-    }
-
-    /**
-     *
-     */
-    public function testGetRole()
-    {
-        $this->user->setRoles(['ROLE_USER']);
-        $result = $this->user->getRoles();
-        $this->assertEquals(['ROLE_USER'], $result);
+        $this->assertSame($task, $this->user->getTask());
     }
 
     /**
@@ -160,6 +102,7 @@ class UserTest extends TestCase
      */
     public function testGetRoles()
     {
-        $this->assertEquals(['ROLE_USER'], $this->user->getRoles());
+        $this->user->setRoles(['ROLE_USER']);
+        $this->assertSame(['ROLE_USER'], $this->user->getRoles());
     }
 }

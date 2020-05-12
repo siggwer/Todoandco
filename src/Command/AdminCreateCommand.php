@@ -119,7 +119,7 @@ class AdminCreateCommand extends Command
         $this->user->setEmail($input->getArgument('email'));
         $this->user->setRoles(['ROLE_ADMIN']);
 
-        $this->repository->save($this->user);
+        $this->repository->userSave($this->user);
 
         $output->writeln('Admin successfully created');
     }

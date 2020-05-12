@@ -18,7 +18,7 @@ use Twig\Environment;
 class TaskIsDoneController
 {
     /**
-     * @Route(path="/tasks-Is-Done", name="tasks_is_done", methods={"GET"})
+     * @Route(path="/tasks/done/{id}", name="task_done", methods={"GET"})
      *
      * @param TaskRepository $repository
      * @param Environment $twig

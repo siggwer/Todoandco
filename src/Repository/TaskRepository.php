@@ -29,8 +29,8 @@ class TaskRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('t')
             ->orderBy('t.createdAt', 'DESC')
             ->getQuery()
-            ->useResultCache(true)
-            ->setQueryCacheLifetime(60)
+            ->enableResultCache(0)
+            ->setQueryCacheLifetime(0)
             ->setResultCacheId('tasks')
             ->getResult();
     }

@@ -14,6 +14,7 @@ use Exception;
  * @package App\Entity
  *
  * @ORM\Entity(repositoryClass="App\Repository\TaskRepository")
+ * @ORM\EntityListeners({"App\Listener\TaskListener"})
  */
 class Task
 {
@@ -98,9 +99,9 @@ class Task
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
@@ -114,9 +115,9 @@ class Task
     }
 
     /**
-     * @return string
+     * @return string| null
      */
-    public function getContent(): string
+    public function getContent(): ?string
     {
         return $this->content;
     }
@@ -143,6 +144,14 @@ class Task
     public function setIsDone(bool $isDone): void
     {
         $this->isDone = $isDone;
+    }
+
+    /**
+     * @param bool $flag
+     */
+    public function switch(bool $flag)
+    {
+        $this->isDone = $flag;
     }
 
     /**
