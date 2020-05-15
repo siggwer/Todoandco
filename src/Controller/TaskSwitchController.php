@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -20,7 +19,7 @@ use App\Entity\Task;
 class TaskSwitchController
 {
     /**
-     * @Route(path="/tasks/switch", name="task_switch", methods={"GET"})
+     * @Route(path="/tasks/{id}/switch", name="task_switch", methods={"GET"})
      * @param Task $task
      * @param TaskRepository $repository
      * @param UrlGeneratorInterface $urlGenerator

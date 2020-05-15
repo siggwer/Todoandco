@@ -1,0 +1,55 @@
+<?php
+
+namespace App\Tests\FunctionalTests\Controller;
+
+use App\Tests\FunctionalTests\AuthenticatorLogin;
+
+/**
+ * Class TaskDoneControllerTest
+ *
+ * @package App\Tests\FunctionalTests\Controller
+ */
+class TaskDoneControllerTest extends AuthenticatorLogin
+{
+    /**
+     *
+     */
+    public function testTaskListIsDoneRedirectionIfNoLogin()
+    {
+        $this->client->request('GET', '/tasks/done');
+
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+    }
+
+    /**
+     *
+     */
+    public function testGetDoneTaskListPageFromHomePage()
+    {
+        $this->logInUser();
+
+        $crawler = $this->client->request('GET', '/');
+
+        $link = $crawler->selectLink('Consulter les tâches terminées')->link();
+
+        $crawler = $this->client->click($link);
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $this->assertSame(1, $crawler->filter('html:contains("Retour à la liste des tâches")')->count());
+    }
+
+    /**
+     *
+     */
+    public function testTaskIsDoneResponse()
+    {
+        $this->logInUser();
+
+        $crawler = $this->client->request('GET', '/tasks-Is-Done');
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $this->assertSame(1, $crawler->filter('html:contains("Retour à la liste des tâches")')->count());
+    }
+}

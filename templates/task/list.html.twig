@@ -12,7 +12,7 @@
         {% endif %}
     </h3>
     <p><a href="{{ path('task_create') }}" class="btn btn-primary">Créer une tâche</a>
-    <a href="{{ path('task_switch') }}" class="btn btn-info">Liste des tâches terminées</a></p>
+    <a href="{{ path('task_done') }}" class="btn btn-info">Liste des tâches terminées</a></p>
     <hr>
     <div class="row justify-content-lg-center">
         {% for task in tasks %}
@@ -29,7 +29,7 @@
                     <p><small>Ajoutée le : {{ task.createdAt | date("d/m/Y") }} à {{ task.createdAt | date("H:i") }}</small></p>
                 <div class="container mt-2">
                     <div class="row justify-content-center">
-                    <form action="{{ path('tasks_switch', {'id' : task.id }) }}">
+                    <form action="{{ path('task_switch', {'id' : task.id }) }}">
                         <p class="separator"><button class="btn btn-success btn-sm">
                                 {% if task.isDone == false %}
                                     Marquer terminée

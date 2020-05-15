@@ -28,7 +28,7 @@
                         <div>
                             <div class="container mt-2">
                                 <div class="row justify-content-center">
-                                    <form action="{{ path('task_toggle', {'id' : task.id }) }}">
+                                    <form action="{{ path('task_switch', {'id' : task.id }) }}">
                                         <p class="separator"><button class="btn btn-success btn-sm">Marquer à faire</button> |</p>
                                     </form>
                                     <form action="{{ path('task_delete', {'id' : task.id }) }}">

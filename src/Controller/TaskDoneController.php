@@ -11,14 +11,14 @@ use Twig\Error\SyntaxError;
 use Twig\Environment;
 
 /**
- * Class TaskIsDoneController
+ * Class TaskDoneController
  *
  * @package App\Controller
  */
-class TaskIsDoneController
+class TaskDoneController
 {
     /**
-     * @Route(path="/tasks/done/{id}", name="task_done", methods={"GET"})
+     * @Route(path="/tasks/done", name="task_done", methods={"GET"})
      *
      * @param TaskRepository $repository
      * @param Environment $twig
@@ -29,7 +29,7 @@ class TaskIsDoneController
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function taskIsDone(TaskRepository $repository, Environment $twig)
+    public function taskDone(TaskRepository $repository, Environment $twig)
     {
         $tasks = $repository->findBy(
             [

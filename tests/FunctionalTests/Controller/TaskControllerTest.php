@@ -2,7 +2,6 @@
 
 namespace App\Tests\FunctionalTests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use App\Tests\FunctionalTests\AuthenticatorLogin;
 
 
@@ -16,40 +15,40 @@ class TaskControllerTest extends AuthenticatorLogin
     /**
      *
      */
-//    public function testCreateTaskRedirectionIfNoLogin()
-//    {
-//        $this->client->request('GET', '/tasks/create');
-//
-//        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
-//    }
-//
-//    /**
-//     *
-//     */
-//    public function testCreateTaskPageIsFound()
-//    {
-//        $this->logInUser();
-//
-//        $crawler = $this->client->request('GET', '/tasks/create');
-//
-//        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-//
-//        $this->assertSame(
-//            1,
-//            $crawler->filter('html:contains("Créer une tâche")')->count());
-//    }
-//
-//    /**
-//     *
-//     */
-//    public function testCreateTaskRedirectionIfLogin()
-//    {
-//        $this->logInUser();
-//
-//        $this->client->request('POST', '/tasks/create');
-//
-//        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-//    }
+    public function testCreateTaskRedirectionIfNoLogin()
+    {
+        $this->client->request('GET', '/tasks/create');
+
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+    }
+
+    /**
+     *
+     */
+    public function testCreateTaskPageIsFound()
+    {
+        $this->logInUser();
+
+        $crawler = $this->client->request('GET', '/tasks/create');
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $this->assertSame(
+            1,
+            $crawler->filter('html:contains("Créer une tâche")')->count());
+    }
+
+    /**
+     *
+     */
+    public function testCreateTaskRedirectionIfLogin()
+    {
+        $this->logInUser();
+
+        $this->client->request('POST', '/tasks/create');
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+    }
 
     /**
      *
@@ -60,7 +59,7 @@ class TaskControllerTest extends AuthenticatorLogin
 
         $crawler = $this->client->request('GET', '/tasks/list');
 
-        $link = $crawler->selectLink('Créer une nouvelle tâche')->link();
+        $link = $crawler->selectLink('Créer une tâche')->link();
 
         $crawler = $this->client->click($link);
 
@@ -83,9 +82,11 @@ class TaskControllerTest extends AuthenticatorLogin
     {
         $this->logIn();
 
-        $crawler = $this->client->request('GET', '/tasks/edit/79');
+        $crawler = $this->client->request('GET', '/tasks/edit/1');
 
         $form = $crawler->selectButton('Modifier')->form();
+
+
         $form['task[title]'] = 'functional test title';
         $form['task[content]'] = 'functional test content';
 
@@ -97,61 +98,61 @@ class TaskControllerTest extends AuthenticatorLogin
     /**
      *
      */
-//    public function testDeleteTaskResponseIfLogin()
-//    {
-//        $this->login();
-//
-//        $this->client->request('GET', '/tasks/delete/79');
-//
-//        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
-//    }
-//
-//    /**
-//     *
-//     */
-//    public function testTaskEditRedirectionIfNoLogin()
-//    {
-//        $this->client->request('GET', '/tasks/edit/77');
-//
-//        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
-//    }
-//
-//    /**
-//     *
-//     */
-//    public function testTaskEditPageIsFound()
-//    {
-//        $this->logIn();
-//
-//        $crawler = $this->client->request('GET', '/tasks/edit/79');
-//
-//        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-//
-//        $this->assertSame(1, $crawler->filter('html:contains("Modifier la tâche")')->count());
-//    }
-//
-//    /**
-//     *
-//     */
-//    public function testEditTaskRedirection()
-//    {
-//        $this->logInUser();
-//
-//        $this->client->request('POST', "/tasks/edit/77");
-//
-//        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-//    }
-//
-//    /**
-//     *
-//     */
-//    public function testEditTaskIfError()
-//    {
-//        if (!$this->logInUser()) {
-//
-//            $this->client->request('POST', '/tasks/edit/77');
-//
-//            $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
-//        }
-//    }
+    public function testDeleteTaskResponseIfLogin()
+    {
+        $this->login();
+
+        $this->client->request('GET', '/tasks/delete/79');
+
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+    }
+
+    /**
+     *
+     */
+    public function testTaskEditRedirectionIfNoLogin()
+    {
+        $this->client->request('GET', '/tasks/edit/77');
+
+        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+    }
+
+    /**
+     *
+     */
+    public function testTaskEditPageIsFound()
+    {
+        $this->logIn();
+
+        $crawler = $this->client->request('GET', '/tasks/edit/79');
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+
+        $this->assertSame(1, $crawler->filter('html:contains("Modifier la tâche")')->count());
+    }
+
+    /**
+     *
+     */
+    public function testEditTaskRedirection()
+    {
+        $this->logInUser();
+
+        $this->client->request('POST', "/tasks/edit/77");
+
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+    }
+
+    /**
+     *
+     */
+    public function testEditTaskIfError()
+    {
+        if (!$this->logInUser()) {
+
+            $this->client->request('POST', '/tasks/edit/77');
+
+            $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        }
+    }
 }
