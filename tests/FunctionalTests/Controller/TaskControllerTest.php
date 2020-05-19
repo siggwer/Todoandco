@@ -2,24 +2,28 @@
 
 namespace App\Tests\FunctionalTests\Controller;
 
-use App\Tests\FunctionalTests\AuthenticatorLogin;
-
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\Tests\FunctionalTests\AuthenticationTrait;
 
 /**
  * Class TaskControllerTest
  *
  * @package App\Tests\FunctionalTests\Controller
  */
-class TaskControllerTest extends AuthenticatorLogin
+class TaskControllerTest extends WebTestCase
 {
+    use AuthenticationTrait;
+
     /**
      *
      */
     public function testCreateTaskRedirectionIfNoLogin()
     {
-        $this->client->request('GET', '/tasks/create');
+        $client = static::createClient();
 
-        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $client->request('GET', '/tasks/create');
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 
     /**
@@ -27,11 +31,11 @@ class TaskControllerTest extends AuthenticatorLogin
      */
     public function testCreateTaskPageIsFound()
     {
-        $this->logInUser();
+        $client = static::createAuthenticatedClient();
 
-        $crawler = $this->client->request('GET', '/tasks/create');
+        $crawler = $client->request('GET', '/tasks/create');
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         $this->assertSame(
             1,
@@ -43,11 +47,11 @@ class TaskControllerTest extends AuthenticatorLogin
      */
     public function testCreateTaskRedirectionIfLogin()
     {
-        $this->logInUser();
+        $client = static::createAuthenticatedClient();
 
-        $this->client->request('POST', '/tasks/create');
+        $client->request('POST', '/tasks/create');
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
     /**
@@ -55,21 +59,21 @@ class TaskControllerTest extends AuthenticatorLogin
      */
     public function testCreateTaskForm()
     {
-        $this->logIn();
+        $client = static::createAuthenticatedClient();
 
-        $crawler = $this->client->request('GET', '/tasks/list');
+        $crawler = $client->request('GET', '/');
 
-        $link = $crawler->selectLink('Créer une tâche')->link();
+        $link = $crawler->selectLink('Créer une nouvelle tâche')->link();
 
-        $crawler = $this->client->click($link);
+        $crawler = $client->click($link);
 
         $form = $crawler->selectButton('Ajouter')->form();
         $form['task[title]'] = 'functional test title';
         $form['task[content]'] = 'functional test content';
 
-        $this->client->submit($form);
+        $client->submit($form);
 
-        $crawler = $this->client->followRedirect();
+        $crawler = $client->followRedirect();
 
         $this->assertSame(1, $crawler->filter('div.alert.alert-dismissible.alert-success')->count());
     }
@@ -80,18 +84,17 @@ class TaskControllerTest extends AuthenticatorLogin
      */
     public function testEditTaskForm()
     {
-        $this->logIn();
+        $client = static::createAuthenticatedClient();
 
-        $crawler = $this->client->request('GET', '/tasks/edit/1');
+        $crawler = $client->request('GET', '/tasks/edit/1');
 
         $form = $crawler->selectButton('Modifier')->form();
-
 
         $form['task[title]'] = 'functional test title';
         $form['task[content]'] = 'functional test content';
 
-        $this->client->submit($form);
-        $crawler = $this->client->followRedirect();
+        $client->submit($form);
+        $crawler = $client->followRedirect();
         $this->assertSame(1, $crawler->filter('div.alert.alert-dismissible.alert-success')->count());
     }
 
@@ -100,11 +103,11 @@ class TaskControllerTest extends AuthenticatorLogin
      */
     public function testDeleteTaskResponseIfLogin()
     {
-        $this->login();
+        $client = static::createAuthenticatedClient();
 
-        $this->client->request('GET', '/tasks/delete/79');
+        $client->request('GET', '/tasks/delete/1');
 
-        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 
     /**
@@ -112,9 +115,11 @@ class TaskControllerTest extends AuthenticatorLogin
      */
     public function testTaskEditRedirectionIfNoLogin()
     {
-        $this->client->request('GET', '/tasks/edit/77');
+        $client = static::createClient();
 
-        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $client->request('GET', '/tasks/edit/26');
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 
     /**
@@ -122,13 +127,13 @@ class TaskControllerTest extends AuthenticatorLogin
      */
     public function testTaskEditPageIsFound()
     {
-        $this->logIn();
+        $client = static::createAuthenticatedClient();
 
-        $crawler = $this->client->request('GET', '/tasks/edit/79');
+        $crawler = $client->request('GET', '/tasks/edit/1');
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $this->assertSame(1, $crawler->filter('html:contains("Modifier la tâche")')->count());
+        $this->assertSame(1, $crawler->filter('html:contains("Modifier")')->count());
     }
 
     /**
@@ -136,11 +141,11 @@ class TaskControllerTest extends AuthenticatorLogin
      */
     public function testEditTaskRedirection()
     {
-        $this->logInUser();
+        $client = static::createAuthenticatedClient();
 
-        $this->client->request('POST', "/tasks/edit/77");
+        $client->request('POST', "/tasks/edit/77");
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
     /**
@@ -148,11 +153,13 @@ class TaskControllerTest extends AuthenticatorLogin
      */
     public function testEditTaskIfError()
     {
-        if (!$this->logInUser()) {
+        $client = static::createAuthenticatedClient();
 
-            $this->client->request('POST', '/tasks/edit/77');
+        if (!$client) {
 
-            $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+            $client->request('POST', '/tasks/edit/25');
+
+            $this->assertEquals(200, $client->getResponse()->getStatusCode());
         }
     }
 }

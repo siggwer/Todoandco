@@ -1,26 +1,18 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Yohann Zaoui
- * Date: 30/12/2018
- * Time: 18:56
- */
 
-namespace Tests\AppBundle\Form;
+namespace App\Tests\FunctionalTests\Form;
 
-
-use AppBundle\Entity\User;
-use AppBundle\Form\UserEditPasswordType;
 use Symfony\Component\Form\Test\TypeTestCase;
+use App\Form\UserEditPasswordType;
+use App\Entity\User;
 
 /**
  * Class UserPasswordTypeTest
- * @package Tests\AppBundle\Form
+ *
+ * @package App\Tests\FunctionalTests\Form
  */
 class UserPasswordTypeTest extends TypeTestCase
 {
-
-
     /**
      *
      */

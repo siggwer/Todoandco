@@ -38,3 +38,7 @@ body {
 .separator {
     color: white;
 }
+
+.nav-link {
+    margin-right: 0.5rem !important;
+}

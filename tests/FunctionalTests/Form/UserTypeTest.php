@@ -1,37 +1,28 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Yohann Zaoui
- * Date: 30/12/2018
- * Time: 14:42
- */
 
-namespace Tests\AppBundle\Form;
+namespace App\Tests\FunctionalTests\Form;
 
-
-use AppBundle\Entity\User;
-use AppBundle\Form\UserType;
 use Symfony\Component\Form\Test\TypeTestCase;
+use App\Form\UserType;
+use App\Entity\User;
 
 /**
  * Class UserTypeTest
- * @package Tests\AppBundle\Form
+ *
+ * @package App\Tests\FunctionalTests\Form
  */
 class UserTypeTest extends TypeTestCase
 {
-
-
     /**
      *
      */
     public function testForm()
     {
-
         $formData = [
           'username' => 'test',
             'password' => [
-                'first_option' => 'pass',
-                'second_option' => 'pass'
+                'first_option' => 'password',
+                'second_option' => 'password'
             ],
             'email' => 'test@test.com',
             'roles' => ['test']
@@ -42,11 +33,13 @@ class UserTypeTest extends TypeTestCase
         $form = $this->factory->create(UserType::class, $userToCompare);
 
         $user = $this->createMock(User::class);
+
         $user->setUsername('test');
-        $user->setPassword('pass');
+        $user->setPassword('password');
         $user->setEmail('test@test.com');
         $user->setRoles(['test']);
-
+        dd($user->setPassword('password'));
+        exit;
         $form->submit($formData);
 
         $this->assertEquals($user, $userToCompare);

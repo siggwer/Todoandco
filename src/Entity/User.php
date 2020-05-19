@@ -87,7 +87,7 @@ class User implements UserInterface
     /**
      * @return string
      */
-    public function getUsername(): string
+    public function getUsername(): ?string
     {
         return $this->username;
     }
@@ -95,7 +95,7 @@ class User implements UserInterface
     /**
      * @param string $username
      */
-    public function setUsername(string $username): void
+    public function setUsername(string $username)
     {
         $this->username = $username;
     }
@@ -103,7 +103,7 @@ class User implements UserInterface
     /**
      * @return string
      */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
@@ -111,7 +111,7 @@ class User implements UserInterface
     /**
      * @param string $password
      */
-    public function setPassword(string $password): void
+    public function setPassword(string $password)
     {
         $this->password = $password;
     }
@@ -119,7 +119,7 @@ class User implements UserInterface
     /**
      * @return string
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -127,7 +127,7 @@ class User implements UserInterface
     /**
      * @param string $email
      */
-    public function setEmail(string $email): void
+    public function setEmail(string $email)
     {
         $this->email = $email;
     }
@@ -143,7 +143,7 @@ class User implements UserInterface
     /**
      * @param DateTimeImmutable $createdAt
      */
-    public function setCreatedAt(DateTimeImmutable $createdAt): void
+    public function setCreatedAt(DateTimeImmutable $createdAt)
     {
         $this->createdAt = $createdAt;
     }
@@ -159,7 +159,7 @@ class User implements UserInterface
     /**
      * @param Task $task
      */
-    public function setTask(Task $task): void
+    public function setTask(Task $task)
     {
         $this->task = $task;
     }
@@ -176,7 +176,7 @@ class User implements UserInterface
     /**
      * @param array $roles
      */
-    public function setRoles(array $roles): void
+    public function setRoles(array $roles)
     {
         $this->roles = $roles;
     }

@@ -33,9 +33,6 @@ class DefaultController extends AuthenticatorLogin
         $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
 
         $this->assertSame(1, $crawler->filter(
-            'html:contains(
-                        "Bienvenue sur Todo List,
-                         l\'application vous permettant de gérer 
-                         l\'ensemble de vos tâches sans effort !")')->count());
+            'html:contains("Bienvenue sur Todo List, l\'application vous permettant de gérer l\'ensemble de vos tâches sans effort !")')->count());
     }
 }

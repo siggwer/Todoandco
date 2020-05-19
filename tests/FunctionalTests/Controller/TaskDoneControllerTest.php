@@ -2,23 +2,28 @@
 
 namespace App\Tests\FunctionalTests\Controller;
 
-use App\Tests\FunctionalTests\AuthenticatorLogin;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\Tests\FunctionalTests\AuthenticationTrait;
 
 /**
  * Class TaskDoneControllerTest
  *
  * @package App\Tests\FunctionalTests\Controller
  */
-class TaskDoneControllerTest extends AuthenticatorLogin
+class TaskDoneControllerTest extends WebTestCase
 {
+    use AuthenticationTrait;
+
     /**
      *
      */
     public function testTaskListIsDoneRedirectionIfNoLogin()
     {
-        $this->client->request('GET', '/tasks/done');
+        $client = static::createClient();
 
-        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $client->request('GET', '/tasks/done');
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 
     /**
@@ -26,15 +31,15 @@ class TaskDoneControllerTest extends AuthenticatorLogin
      */
     public function testGetDoneTaskListPageFromHomePage()
     {
-        $this->logInUser();
+        $client = static::createAuthenticatedClient();
 
-        $crawler = $this->client->request('GET', '/');
+        $crawler = $client->request('GET', '/');
 
         $link = $crawler->selectLink('Consulter les tâches terminées')->link();
 
-        $crawler = $this->client->click($link);
+        $crawler = $client->click($link);
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         $this->assertSame(1, $crawler->filter('html:contains("Retour à la liste des tâches")')->count());
     }
@@ -44,11 +49,11 @@ class TaskDoneControllerTest extends AuthenticatorLogin
      */
     public function testTaskIsDoneResponse()
     {
-        $this->logInUser();
+        $client = static::createAuthenticatedClient();
 
-        $crawler = $this->client->request('GET', '/tasks-Is-Done');
+        $crawler = $client->request('GET', '/tasks/done');
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         $this->assertSame(1, $crawler->filter('html:contains("Retour à la liste des tâches")')->count());
     }

@@ -114,7 +114,6 @@ class TaskEditController
         Request $request,
         TaskEditHandler $taskEditHandler
     ) {
-
         if ($this->authorization->isGranted(TaskVoter::EDIT, $task) === true) {
 
             $form = $this->formFactory->create(TaskType::class, $task)

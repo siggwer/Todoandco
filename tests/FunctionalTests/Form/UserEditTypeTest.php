@@ -1,25 +1,18 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Yohann Zaoui
- * Date: 30/12/2018
- * Time: 14:00
- */
 
-namespace Tests\AppBundle\Form;
+namespace App\Tests\FunctionalTests\Form;
 
-
-use AppBundle\Entity\User;
-use AppBundle\Form\UserEditType;
 use Symfony\Component\Form\Test\TypeTestCase;
+use App\Form\UserEditType;
+use App\Entity\User;
 
 /**
  * Class UserEditTypeTest
- * @package Tests\AppBundle\Form
+ *
+ * @package App\Tests\FunctionalTests\Form
  */
 class UserEditTypeTest extends TypeTestCase
 {
-
     /**
      *
      */

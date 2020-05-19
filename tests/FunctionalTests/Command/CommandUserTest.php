@@ -18,7 +18,6 @@ class CommandUserTest extends KernelTestCase
      */
     public function testExecute()
     {
-
         $string = str_shuffle('azertyuiop123456');
 
         $kernel = static::createKernel();

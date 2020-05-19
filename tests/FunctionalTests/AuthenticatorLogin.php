@@ -35,7 +35,7 @@ class AuthenticatorLogin extends WebTestCase
     {
         $session = $this->client->getContainer()->get('session');
         $em = $this->client->getContainer()->get('doctrine.orm.entity_manager');
-        $user = $em->getRepository(User::class)->findOneBy(['username'=>'admin']);
+        $user = $em->getRepository(User::class)->findOneBy(['username'=>'username1']);
 
         $token = new UsernamePasswordToken($user, null, 'main', ['ROLE_ADMIN']);
         $session->set('_security_'.'main', serialize($token));

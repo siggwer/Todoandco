@@ -1,20 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Yohann Zaoui
- * Date: 30/12/2018
- * Time: 13:40
- */
 
-namespace Tests\AppBundle\Form;
+namespace App\Tests\FunctionalTests\Form;
 
-use AppBundle\Entity\Task;
-use AppBundle\Form\TaskType;
 use Symfony\Component\Form\Test\TypeTestCase;
+use App\Form\TaskType;
+use App\Entity\Task;
 
 /**
  * Class TaskTypeTest
- * @package Tests\AppBundle\Form
+ *
+ * @package App\Tests\FunctionalTests\Form
  */
 class TaskTypeTest extends TypeTestCase
 {

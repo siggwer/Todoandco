@@ -2,17 +2,23 @@
 
 namespace App\Tests\UnitTests\Controller;
 
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormInterface;
+use App\Controller\UserDeleteController;
 use App\Controller\UserCreateController;
-use App\Handler\UserCreateHandler;
 use App\Repository\UserRepository;
+use App\Handler\UserCreateHandler;
 use PHPUnit\Framework\TestCase;
 use Twig\Environment;
+use App\Entity\User;
 use Exception;
 
 /**
@@ -41,7 +47,7 @@ class UserControllerUnitTest extends TestCase
     /**
      * @var
      */
-    private $createUserHandler;
+    private $userCreateHandler;
     /**
      * @var
      */
@@ -83,7 +89,7 @@ class UserControllerUnitTest extends TestCase
      */
     public function testCreateUserIfHandleFalse()
     {
-        $this->createUserHandler->method('handle')->willReturn(false);
+        $this->userCreateHandler->method('handle')->willReturn(false);
 
         $this->form->method('handleRequest')->willReturn($this->form);
 
@@ -99,7 +105,7 @@ class UserControllerUnitTest extends TestCase
         );
 
         $this->assertInstanceOf(Response::class,
-            $controller->createUser($request, $this->createUserHandler));
+            $controller->userCreate($request, $this->user));
     }
 
 
@@ -109,7 +115,7 @@ class UserControllerUnitTest extends TestCase
     public function testCreateUserIfHandleTrue()
     {
 
-        $this->createUserHandler->method('handle')->willReturn(true);
+        $this->userCreateHandler->method('handle')->willReturn(true);
 
         $this->form->method('handleRequest')->willReturn($this->form);
 
@@ -117,7 +123,7 @@ class UserControllerUnitTest extends TestCase
 
         $this->urlGenerator->method('generate')->willReturn('user_list');
 
-        $request = Request::create('/tasks/create', 'POST');
+        $request = Request::create('/users/create', 'POST');
 
         $controller = new UserCreateController(
             $this->twig,
@@ -127,41 +133,40 @@ class UserControllerUnitTest extends TestCase
         );
 
         $this->assertInstanceOf(RedirectResponse::class,
-            $controller->userCreate($request, $this->createUserHandler));
+            $controller->userCreate($request, $this->userCreateHandler));
     }
 
-//    /**
-//     *
-//     */
-//    public function testDeleteUserRedirection()
-//    {
-//        $user = $this->createMock(User::class);
-//
-//        $userToken = $this->createMock(TokenInterface::class);
-//        $userToken->method('getUser')->willReturn($userToken);
-//
-//        $tokenStorage = $this->createMock(TokenStorageInterface::class);
-//        $tokenStorage->method('getToken')->willReturn($userToken);
-//
-//        $this->urlGenerator->method('generate')->willReturn('user_list');
-//
-//        $addFlash = $this->createMock(FlashBag::class);
-//        $addFlash->method('add')->willReturn('test');
-//
-//        $messageFlash = $this->createMock(Session::class);
-//        $messageFlash->method('getFlashBag')->willReturn($addFlash);
-//
-//        $controller = new UserController(
-//            $this->twig,
-//            $this->formFactory,
-//            $this->urlGenerator,
-//            $this->repository
-//        );
-//
-//        $this->assertInstanceOf(RedirectResponse::class,
-//            $controller->deleteUser($user, $tokenStorage, $messageFlash));
-//    }
-//
+    /**
+     *
+     */
+    public function testDeleteUserRedirection()
+    {
+        $user = $this->createMock(User::class);
+
+        $userToken = $this->createMock(TokenInterface::class);
+        $userToken->method('getUser')->willReturn($userToken);
+
+        $tokenStorage = $this->createMock(TokenStorageInterface::class);
+        $tokenStorage->method('getToken')->willReturn($userToken);
+
+        $this->urlGenerator->method('generate')->willReturn('user_list');
+
+        $addFlash = $this->createMock(FlashBag::class);
+        $addFlash->method('add')->willReturn('test');
+
+        $messageFlash = $this->createMock(Session::class);
+        $messageFlash->method('getFlashBag')->willReturn($addFlash);
+
+        $controller = new UserDeleteController(
+            $this->twig,
+            $this->urlGenerator,
+            $this->repository
+        );
+
+        $this->assertInstanceOf(RedirectResponse::class,
+            $controller->deleteUser($user, $tokenStorage, $messageFlash));
+    }
+
 //    /**
 //     * @throws Exception
 //     */
