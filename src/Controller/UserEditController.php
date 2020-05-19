@@ -47,10 +47,10 @@ class UserEditController
     /**
      * UserEditController constructor.
      *
-     * @param Environment $twig
-     * @param FormFactoryInterface $formFactory
+     * @param Environment           $twig
+     * @param FormFactoryInterface  $formFactory
      * @param UrlGeneratorInterface $urlGenerator
-     * @param UserRepository $repository
+     * @param UserRepository        $repository
      */
     public function __construct(
         Environment $twig,
@@ -67,8 +67,8 @@ class UserEditController
     /**
      * @Route(path="/users/edit/{id}", name="user_edit", methods={"GET", "POST"})
      *
-     * @param User $user
-     * @param Request $request
+     * @param User            $user
+     * @param Request         $request
      * @param UserEditHandler $UserEditHandler
      *
      * @return RedirectResponse|Response
@@ -86,7 +86,6 @@ class UserEditController
             ->handleRequest($request);
 
         if ($UserEditHandler->handle($form)) {
-
             return new RedirectResponse(
                 $this->urlGenerator->generate('user_list'),
                 RedirectResponse::HTTP_FOUND
@@ -95,11 +94,13 @@ class UserEditController
 
         return new Response(
             $this->twig->render(
-                'user/edit.html.twig', [
+                'user/edit.html.twig',
+                [
                     'form' => $form->createView(),
                     'user' => $user
                 ]
-            ), Response::HTTP_OK
+            ),
+            Response::HTTP_OK
         );
     }
 }

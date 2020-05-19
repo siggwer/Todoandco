@@ -33,9 +33,9 @@ class TaskCreateHandler
     /**
      * TaskCreateHandler constructor.
      *
-     * @param TaskRepository $repository
+     * @param TaskRepository        $repository
      * @param TokenStorageInterface $tokenStorage
-     * @param SessionInterface $messageFlash
+     * @param SessionInterface      $messageFlash
      */
     public function __construct(
         TaskRepository $repository,
@@ -49,14 +49,13 @@ class TaskCreateHandler
 
     /**
      * @param FormInterface $form
-     * @param Task $task
+     * @param Task          $task
      *
      * @return bool
      */
     public function handle(FormInterface $form, Task $task)
     {
         if ($form->isSubmitted() && $form->isValid()) {
-
             $task->setUser($this->tokenStorage->getToken()->getUser());
 
             $this->repository->save($task);
@@ -67,5 +66,4 @@ class TaskCreateHandler
         }
         return false;
     }
-
 }

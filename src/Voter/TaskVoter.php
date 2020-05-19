@@ -45,8 +45,8 @@ class TaskVoter extends Voter
     }
 
     /**
-     * @param string $attribute
-     * @param mixed $subject
+     * @param string         $attribute
+     * @param mixed          $subject
      * @param TokenInterface $token
      *
      * @return bool
@@ -62,10 +62,10 @@ class TaskVoter extends Voter
         $task = $subject;
 
         switch ($attribute) {
-            case self::EDIT:
-                return $this->canEdit($task, $user);
-            case self::DELETE:
-                return $this->canDelete($task, $user);
+        case self::EDIT:
+            return $this->canEdit($task, $user);
+        case self::DELETE:
+            return $this->canDelete($task, $user);
         }
 
         throw new LogicException('This code should not be reached!');
@@ -77,7 +77,7 @@ class TaskVoter extends Voter
      *
      * @return bool
      */
-    private function canEdit(Task $task,User $user): bool
+    private function canEdit(Task $task, User $user): bool
     {
         return $user === $task->getUser();
     }

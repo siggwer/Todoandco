@@ -33,9 +33,9 @@ class UserCreateHandler
     /**
      * UserCreateHandler constructor.
      *
-     * @param UserRepository $repository
+     * @param UserRepository               $repository
      * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param SessionInterface $messageFlash
+     * @param SessionInterface             $messageFlash
      */
     public function __construct(
         UserRepository $repository,
@@ -49,14 +49,13 @@ class UserCreateHandler
 
     /**
      * @param FormInterface $form
-     * @param User $user
+     * @param User          $user
      *
      * @return bool
      */
     public function handle(FormInterface $form, User $user)
     {
         if ($form->isSubmitted() && $form->isValid()) {
-
             $password = $this->passwordEncoder->encodePassword($user, $user->getPassword());
 
             $user->setPassword($password);

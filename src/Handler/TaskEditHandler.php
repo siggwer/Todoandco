@@ -28,7 +28,7 @@ class TaskEditHandler
     /**
      * TaskEditHandler constructor.
      *
-     * @param TaskRepository $repository
+     * @param TaskRepository   $repository
      * @param SessionInterface $messageFlash
      */
     public function __construct(
@@ -50,7 +50,6 @@ class TaskEditHandler
     public function handle(FormInterface $form)
     {
         if ($form->isSubmitted() && $form->isValid()) {
-
             $this->repository->update();
 
             $this->messageFlash->getFlashBag()->add('success', 'La tâche a bien été modifiée.');

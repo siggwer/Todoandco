@@ -30,7 +30,8 @@ class TaskRepository extends ServiceEntityRepository
             ->orderBy('t.createdAt', 'DESC')
             ->getQuery()
             ->enableResultCache(0)
-            ->setQueryCacheLifetime(0)
+            ->useQueryCache(true)
+            ->setQueryCacheLifetime(60)
             ->setResultCacheId('tasks')
             ->getResult();
     }

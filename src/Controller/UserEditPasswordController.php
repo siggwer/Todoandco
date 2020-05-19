@@ -49,10 +49,10 @@ class UserEditPasswordController
     /**
      * UserEditPasswordController constructor.
      *
-     * @param Environment $twig
-     * @param FormFactoryInterface $formFactory
+     * @param Environment           $twig
+     * @param FormFactoryInterface  $formFactory
      * @param UrlGeneratorInterface $urlGenerator
-     * @param UserRepository $repository
+     * @param UserRepository        $repository
      */
     public function __construct(
         Environment $twig,
@@ -69,8 +69,8 @@ class UserEditPasswordController
     /**
      * @Route(path="/user/password/{id}", name="user_password", methods={"GET", "POST"})
      *
-     * @param User $user
-     * @param Request $request
+     * @param User                    $user
+     * @param Request                 $request
      * @param UserEditPasswordHandler $userEditPasswordHandler
      *
      * @return RedirectResponse|Response
@@ -90,7 +90,6 @@ class UserEditPasswordController
             ->handleRequest($request);
 
         if ($userEditPasswordHandler->handle($form, $user)) {
-
             return new RedirectResponse(
                 $this->urlGenerator->generate('user_list'),
                 RedirectResponse::HTTP_FOUND
@@ -99,12 +98,13 @@ class UserEditPasswordController
 
         return new Response(
             $this->twig->render(
-                'user/update_password.html.twig', [
+                'user/update_password.html.twig',
+                [
                     'form' => $form->createView(),
                     'user' => $user
                 ]
-            ), Response::HTTP_OK
+            ),
+            Response::HTTP_OK
         );
     }
-
 }

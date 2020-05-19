@@ -20,10 +20,10 @@ class TaskSwitchController
 {
     /**
      * @Route(path="/tasks/{id}/switch", name="task_switch", methods={"GET"})
-     * @param Task $task
-     * @param TaskRepository $repository
-     * @param UrlGeneratorInterface $urlGenerator
-     * @param SessionInterface $messageFlash
+     * @param                            Task                  $task
+     * @param                            TaskRepository        $repository
+     * @param                            UrlGeneratorInterface $urlGenerator
+     * @param                            SessionInterface      $messageFlash
      *
      * @return RedirectResponse
      *
@@ -41,11 +41,13 @@ class TaskSwitchController
         $repository->update();
 
         if ($task->isDone() == false) {
-
             $messageFlash->getFlashBag()->add(
                 'success',
-                sprintf('La tâche %s a bien été marquée : à faire.',
-                    $task->getTitle()));
+                sprintf(
+                    'La tâche %s a bien été marquée : à faire.',
+                    $task->getTitle()
+                )
+            );
         }
 
         return new RedirectResponse(

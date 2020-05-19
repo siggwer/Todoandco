@@ -21,7 +21,7 @@ class TaskDoneController
      * @Route(path="/tasks/done", name="task_done", methods={"GET"})
      *
      * @param TaskRepository $repository
-     * @param Environment $twig
+     * @param Environment    $twig
      *
      * @return Response
      *
@@ -39,10 +39,12 @@ class TaskDoneController
 
         return new Response(
             $twig->render(
-                'task/is_done.html.twig', [
+                'task/is_done.html.twig',
+                [
                     'tasks' => $tasks
                 ]
-            ), Response::HTTP_OK
+            ),
+            Response::HTTP_OK
         );
     }
 }

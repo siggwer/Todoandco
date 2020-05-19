@@ -21,7 +21,7 @@ class TaskListController
      * @Route(path="/tasks/list", name="task_list", methods={"GET"})
      *
      * @param TaskRepository $repository
-     * @param Environment $twig
+     * @param Environment    $twig
      *
      * @return Response
      *
@@ -35,10 +35,12 @@ class TaskListController
 
         return new Response(
             $twig->render(
-                'task/list.html.twig', [
+                'task/list.html.twig',
+                [
                     'tasks' => $tasks
                 ]
-            ), Response::HTTP_OK
+            ),
+            Response::HTTP_OK
         );
     }
 }

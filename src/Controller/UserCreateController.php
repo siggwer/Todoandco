@@ -47,10 +47,10 @@ class UserCreateController
     /**
      * UserCreateController constructor.
      *
-     * @param Environment $twig
-     * @param FormFactoryInterface $formFactory
+     * @param Environment           $twig
+     * @param FormFactoryInterface  $formFactory
      * @param UrlGeneratorInterface $urlGenerator
-     * @param UserRepository $repository
+     * @param UserRepository        $repository
      */
     public function __construct(
         Environment $twig,
@@ -67,7 +67,7 @@ class UserCreateController
     /**
      * @Route(path="/users/create", name="user_create", methods={"GET","POST"})
      *
-     * @param Request $request
+     * @param Request           $request
      * @param UserCreateHandler $userCreateHandler
      *
      * @return RedirectResponse|Response
@@ -84,7 +84,6 @@ class UserCreateController
             ->handleRequest($request);
 
         if ($userCreateHandler->handle($form, $user)) {
-
             return new RedirectResponse(
                 $this->urlGenerator->generate('user_list'),
                 RedirectResponse::HTTP_FOUND
@@ -93,10 +92,12 @@ class UserCreateController
 
         return new Response(
             $this->twig->render(
-                'user/create.html.twig', [
+                'user/create.html.twig',
+                [
                     'form' => $form->createView()
                 ]
-            ), Response::HTTP_OK
+            ),
+            Response::HTTP_OK
         );
     }
 }

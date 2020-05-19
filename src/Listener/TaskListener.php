@@ -19,6 +19,7 @@ class TaskListener
 
     /**
      * TaskListener constructor.
+     *
      * @param $cacheDriver
      */
     public function __construct($cacheDriver)
@@ -27,7 +28,7 @@ class TaskListener
     }
 
     /**
-     * @param Task $task
+     * @param Task               $task
      * @param LifecycleEventArgs $args
      */
     public function postPersist(Task $task, LifecycleEventArgs $args)
@@ -36,7 +37,7 @@ class TaskListener
     }
 
     /**
-     * @param Task $task
+     * @param Task               $task
      * @param LifecycleEventArgs $args
      */
     public function postUpdate(Task $task, LifecycleEventArgs $args)
@@ -45,7 +46,7 @@ class TaskListener
     }
 
     /**
-     * @param Task $task
+     * @param Task               $task
      * @param LifecycleEventArgs $args
      */
     public function postRemove(Task $task, LifecycleEventArgs $args)

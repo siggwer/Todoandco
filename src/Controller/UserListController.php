@@ -21,7 +21,7 @@ class UserListController
      * @Route(path="/users/list", name="user_list", methods={"GET"})
      *
      * @param UserRepository $repository
-     * @param Environment $twig
+     * @param Environment    $twig
      *
      * @return Response
      *
@@ -34,10 +34,13 @@ class UserListController
         $user = $repository->findAll();
 
         return new Response(
-            $twig->render('user/list.html.twig', [
+            $twig->render(
+                'user/list.html.twig',
+                [
                 'users' => $user
                 ]
-            ), Response::HTTP_OK
+            ),
+            Response::HTTP_OK
         );
     }
 }

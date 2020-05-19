@@ -68,12 +68,12 @@ class TaskEditController
     /**
      * TaskEditController constructor.
      *
-     * @param TaskRepository $repository
-     * @param TokenStorageInterface $tokenStorage
-     * @param Environment $twig
-     * @param FormFactoryInterface $formFactory
-     * @param UrlGeneratorInterface $urlGenerator
-     * @param SessionInterface $messageFlash
+     * @param TaskRepository                $repository
+     * @param TokenStorageInterface         $tokenStorage
+     * @param Environment                   $twig
+     * @param FormFactoryInterface          $formFactory
+     * @param UrlGeneratorInterface         $urlGenerator
+     * @param SessionInterface              $messageFlash
      * @param AuthorizationCheckerInterface $authorization
      */
     public function __construct(
@@ -97,8 +97,8 @@ class TaskEditController
     /**
      * @Route(path="/tasks/edit/{id}", name="task_edit", methods={"GET","POST"})
      *
-     * @param Task $task
-     * @param Request $request
+     * @param Task            $task
+     * @param Request         $request
      * @param TaskEditHandler $taskEditHandler
      *
      * @return RedirectResponse|Response
@@ -115,12 +115,10 @@ class TaskEditController
         TaskEditHandler $taskEditHandler
     ) {
         if ($this->authorization->isGranted(TaskVoter::EDIT, $task) === true) {
-
             $form = $this->formFactory->create(TaskType::class, $task)
                 ->handleRequest($request);
 
             if ($taskEditHandler->handle($form)) {
-
                 return new RedirectResponse(
                     $this->urlGenerator->generate('task_list'),
                     RedirectResponse::HTTP_FOUND
@@ -129,21 +127,24 @@ class TaskEditController
 
             return new Response(
                 $this->twig->render(
-                    'task/edit.html.twig', [
+                    'task/edit.html.twig',
+                    [
                         'form' => $form->createView(),
                         'task' => $task,
                     ]
-                ), Response::HTTP_OK
+                ),
+                Response::HTTP_OK
             );
         }
 
         return new Response(
             $this->twig->render(
-                'error/error.html.twig', [
+                'error/error.html.twig',
+                [
                     'error' => "Erreur : Impossible d'éditer cette tâche."
                 ]
-            ), Response::HTTP_OK
+            ),
+            Response::HTTP_OK
         );
     }
-
 }

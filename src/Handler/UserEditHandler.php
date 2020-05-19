@@ -28,7 +28,7 @@ class UserEditHandler
     /**
      * UserEditHandler constructor
      *
-     * @param UserRepository $repository
+     * @param UserRepository   $repository
      * @param SessionInterface $messageFlash
      */
     public function __construct(UserRepository $repository, SessionInterface $messageFlash)
@@ -48,7 +48,6 @@ class UserEditHandler
     public function handle(FormInterface $form)
     {
         if ($form->isSubmitted() && $form->isValid()) {
-
             $this->repository->userUpdate();
 
             $this->messageFlash->getFlashBag()->add('success', "L'utilisateur a bien été modifié.");
@@ -57,5 +56,4 @@ class UserEditHandler
         }
         return false;
     }
-
 }

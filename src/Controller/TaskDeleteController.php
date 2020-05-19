@@ -63,12 +63,12 @@ class TaskDeleteController
     /**
      * TaskDeleteController constructor.
      *
-     * @param TaskRepository $repository
-     * @param TokenStorageInterface $tokenStorage
-     * @param Environment $twig
-     * @param FormFactoryInterface $formFactory
-     * @param UrlGeneratorInterface $urlGenerator
-     * @param SessionInterface $messageFlash
+     * @param TaskRepository                $repository
+     * @param TokenStorageInterface         $tokenStorage
+     * @param Environment                   $twig
+     * @param FormFactoryInterface          $formFactory
+     * @param UrlGeneratorInterface         $urlGenerator
+     * @param SessionInterface              $messageFlash
      * @param AuthorizationCheckerInterface $authorization
      */
     public function __construct(
@@ -103,7 +103,6 @@ class TaskDeleteController
     public function TaskDelete(Task $task)
     {
         if ($this->authorization->isGranted(TaskVoter::DELETE, $task) === true) {
-
             $this->repository->delete($task);
 
             $this->messageFlash->getFlashBag()->add('success', "Tâche supprimée.");
@@ -115,10 +114,12 @@ class TaskDeleteController
         }
         return new Response(
             $this->twig->render(
-                'error/error.html.twig', [
+                'error/error.html.twig',
+                [
                     'error' => 'Erreur : Impossible de supprimer cette tâche.'
                 ]
-            ), Response::HTTP_OK
+            ),
+            Response::HTTP_OK
         );
     }
 }

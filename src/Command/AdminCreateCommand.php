@@ -53,10 +53,10 @@ class AdminCreateCommand extends Command
      * AdminCreateCommand constructor.
      *
      * @param EncoderFactoryInterface $encoderFactory
-     * @param UserRepository $repository
-     * @param bool $username
-     * @param bool $password
-     * @param bool $email
+     * @param UserRepository          $repository
+     * @param bool                    $username
+     * @param bool                    $password
+     * @param bool                    $email
      */
     public function __construct(
         EncoderFactoryInterface $encoderFactory,
@@ -89,7 +89,7 @@ class AdminCreateCommand extends Command
     }
 
     /**
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
      *
      * @return int|void
@@ -99,11 +99,13 @@ class AdminCreateCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln([
+        $output->writeln(
+            [
             'Admin Creator',
             '============',
             '',
-        ]);
+            ]
+        );
 
         $output->writeln('You are about to create an admin-user.');
         $output->writeln('Username: ' .$input->getArgument('username'));

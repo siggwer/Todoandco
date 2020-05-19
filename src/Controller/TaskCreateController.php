@@ -65,12 +65,12 @@ class TaskCreateController
     /**
      * TaskCreateController constructor.
      *
-     * @param TaskRepository $repository
-     * @param TokenStorageInterface $tokenStorage
-     * @param Environment $twig
-     * @param FormFactoryInterface $formFactory
-     * @param UrlGeneratorInterface $urlGenerator
-     * @param SessionInterface $messageFlash
+     * @param TaskRepository                $repository
+     * @param TokenStorageInterface         $tokenStorage
+     * @param Environment                   $twig
+     * @param FormFactoryInterface          $formFactory
+     * @param UrlGeneratorInterface         $urlGenerator
+     * @param SessionInterface              $messageFlash
      * @param AuthorizationCheckerInterface $authorization
      */
     public function __construct(
@@ -94,7 +94,7 @@ class TaskCreateController
     /**
      * @Route(path="/tasks/create", name="task_create", methods={"GET","POST"})
      *
-     * @param Request $request
+     * @param Request           $request
      * @param TaskCreateHandler $taskCreateHandler
      *
      * @return RedirectResponse|Response
@@ -113,7 +113,6 @@ class TaskCreateController
             ->handleRequest($request);
 
         if ($taskCreateHandler->handle($form, $task)) {
-
             return new RedirectResponse(
                 $this->urlGenerator->generate('task_list'),
                 RedirectResponse::HTTP_FOUND
@@ -122,10 +121,12 @@ class TaskCreateController
 
         return new Response(
             $this->twig->render(
-                'task/create.html.twig', [
+                'task/create.html.twig',
+                [
                     'form' => $form->createView()
                 ]
-            ), Response::HTTP_OK
+            ),
+            Response::HTTP_OK
         );
     }
 }

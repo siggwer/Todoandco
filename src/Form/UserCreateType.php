@@ -18,25 +18,31 @@ class UserCreateType extends AbstractType
     /**
      * @param FormBuilderInterface $builder
      *
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add(
-                'username', TextType::class, [
+                'username',
+                TextType::class,
+                [
                     'label' => "Nom d'utilisateur"
                 ]
             )
 
             ->add(
-                'email', EmailType::class, [
+                'email',
+                EmailType::class,
+                [
                     'label' => 'Adresse email'
                 ]
             )
 
             ->add(
-                'roles', ChoiceType::class, [
+                'roles',
+                ChoiceType::class,
+                [
                     'required' => true,
                     'choices' => [
                         'Utilisateur' => 'ROLE_USER',

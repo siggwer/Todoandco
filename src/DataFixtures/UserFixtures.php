@@ -45,7 +45,7 @@ class UserFixtures extends Fixture
             $user->setRoles(['ROLE_USER']);
             $this->setReference(self::USER_REFERENCE . '_' . $i, $user);
             $manager->persist($user);
-            }
-            $manager->flush();
+        }
+        $manager->flush();
     }
 }

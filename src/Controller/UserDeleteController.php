@@ -38,9 +38,9 @@ class UserDeleteController
     /**
      * UserDeleteController constructor.
      *
-     * @param Environment $twig
+     * @param Environment           $twig
      * @param UrlGeneratorInterface $urlGenerator
-     * @param UserRepository $repository
+     * @param UserRepository        $repository
      */
     public function __construct(Environment $twig, UrlGeneratorInterface $urlGenerator, UserRepository $repository)
     {
@@ -52,9 +52,9 @@ class UserDeleteController
     /**
      * @Route(path="/delete/user/{id}", name="user_delete", methods={"GET"})
      *
-     * @param User $user
+     * @param User                  $user
      * @param TokenStorageInterface $tokenStorage
-     * @param SessionInterface $messageFlash
+     * @param SessionInterface      $messageFlash
      *
      * @return RedirectResponse
      *
@@ -67,7 +67,6 @@ class UserDeleteController
         SessionInterface $messageFlash
     ) {
         if ($user != $tokenStorage->getToken()->getUser()) {
-
             $this->repository->userDelete($user);
 
             $messageFlash->getFlashBag()->add('success', "L'utilisateur a bien été supprimée.");

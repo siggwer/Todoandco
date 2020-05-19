@@ -1,31 +1,3 @@
-{#<nav class="navbar navbar-expand-lg navbar-light fixed-top background-nav">#}
-{#    <div class="container">#}
-{#        <a style="color: darkblue" class="navbar-brand" href="/">To Do List</a>#}
-{#        <a href="/"><img src="{{ asset('img/new_logo_oc.jpg') }}" alt="OpenClassrooms"/></a>#}
-{#        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">#}
-{#            <span class="navbar-toggler-icon"></span>#}
-{#        </button>#}
-
-{#        <div class="collapse navbar-collapse" id="navbarColor03">#}
-{#            <ul class="navbar-nav mr-auto">#}
-{#                {% if is_granted('ROLE_ADMIN') %}#}
-{#                    <li>#}
-{#                        <a style="color: darkblue" class="nav-link" href="">Gérer les utilisateurs</a>#}
-{#                    </li>#}
-{#                {% endif %}#}
-{#                <li>#}
-{#                    <a style="color: white" class="nav-link btn btn-primary" href="">Créer un utilisateur</a>#}
-{#                </li>#}
-{#                <li>#}
-{#                    {% if app.user %}#}
-{#                        <a style="color: white" class="nav-link btn btn-danger" href="">Se déconnecter</a>#}
-{#                    {% endif %}#}
-{#                </li>#}
-{#            </ul>#}
-{#        </div>#}
-{#    </div>#}
-{#</nav>#}
-
 <div id="navbar-top">
     <nav class="navbar navbar-expand-md navbar-light bg-white fixed-top background-nav" {{ app.session.flashbag.peek('success')|length > 0 ? '' : 'mb-5' }}>
         <div class="container">
