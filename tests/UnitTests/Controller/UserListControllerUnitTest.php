@@ -6,9 +6,6 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Controller\UserListController;
 use App\Repository\UserRepository;
 use PHPUnit\Framework\TestCase;
-use Twig_Error_Runtime;
-use Twig_Error_Loader;
-use Twig_Error_Syntax;
 use Twig\Environment;
 
 /**
@@ -19,9 +16,9 @@ use Twig\Environment;
 class UserListControllerUnitTest extends TestCase
 {
     /**
-     * @throws Twig_Error_Loader
-     * @throws Twig_Error_Runtime
-     * @throws Twig_Error_Syntax
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
      */
     public function testUsersListResponse()
     {

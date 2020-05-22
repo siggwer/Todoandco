@@ -83,11 +83,9 @@ class UserControllerUnitTest extends TestCase
 
 
     /**
-     * @covers \App\Handler\CreateUserHandler::handle
-     *
      * @throws Exception
      */
-    public function testCreateUserIfHandleFalse()
+    public function testUserCreateIfHandleFalse()
     {
         $this->userCreateHandler->method('handle')->willReturn(false);
 
@@ -105,14 +103,14 @@ class UserControllerUnitTest extends TestCase
         );
 
         $this->assertInstanceOf(Response::class,
-            $controller->userCreate($request, $this->user));
+            $controller->userCreate($request, $this->UserCreateHandler));
     }
 
 
     /**
      * @throws Exception
      */
-    public function testCreateUserIfHandleTrue()
+    public function testUserCreateIfHandleTrue()
     {
 
         $this->userCreateHandler->method('handle')->willReturn(true);

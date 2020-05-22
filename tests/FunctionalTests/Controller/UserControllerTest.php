@@ -2,29 +2,32 @@
 
 namespace App\Tests\FunctionalTests\Controller;
 
-use App\Tests\FunctionalTests\AuthenticatorLogin;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\Tests\FunctionalTests\AuthenticationTrait;
 
 /**
  * Class UserControllerTest
  *
  * @package App\Tests\FunctionalTests\Controller
  */
-class UserControllerTest extends AuthenticatorLogin
+class UserControllerTest extends WebTestCase
 {
+    use AuthenticationTrait;
+
     /**
      *
      */
     public function testGetListUserPageFromHomePage()
     {
-        $this->logInUser();
+        $client = static::logInUser();
 
-        $crawler = $this->client->request('GET', '/');
+        $crawler = $client->request('GET', '/');
 
         $link = $crawler->selectLink('Gérer les utilisateurs')->link();
 
-        $crawler = $this->client->click($link);
+        $crawler = $client->click($link);
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         $this->assertSame(1, $crawler->filter('html:contains("Nom d\'utilisateur")')->count());
     }
@@ -34,15 +37,15 @@ class UserControllerTest extends AuthenticatorLogin
      */
     public function testGetCreateUserPageFromHomePage()
     {
-        $this->logInUser();
+        $client = static::createAuthenticatedClient();
 
-        $crawler = $this->client->request('GET', '/');
+        $crawler = $client->request('GET', '/');
 
         $link = $crawler->selectLink('Créer un utilisateur')->link();
 
-        $crawler = $this->client->click($link);
+        $crawler = $client->click($link);
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         $this->assertSame(1, $crawler->filter('html:contains("Créer un utilisateur")')->count());
     }
@@ -52,14 +55,13 @@ class UserControllerTest extends AuthenticatorLogin
      */
     public function testUserCreatePageIsFound()
     {
-        $this->logInUser();
+        $client = static::createAuthenticatedClient();
 
-        $crawler = $this->client->request('GET', '/users/create');
+        $crawler = $client->request('GET', '/users/create');
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $this->assertSame(
-            1, $crawler->filter('html:contains("Créer un utilisateur")')->count());
+        $this->assertSame(1, $crawler->filter('html:contains("Créer un utilisateur")')->count());
     }
 
     /**
@@ -67,11 +69,11 @@ class UserControllerTest extends AuthenticatorLogin
      */
     public function testUserCreateRedirection()
     {
-        $this->logInUser();
+        $client = static::createAuthenticatedClient();
 
-        $this->client->request('POST', '/users/create');
+        $client->request('POST', '/users/create');
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
     /**
@@ -79,9 +81,9 @@ class UserControllerTest extends AuthenticatorLogin
      */
     public function testCreateUserForm()
     {
-        $this->logInUser();
+        $client = static::LoginUser();
 
-        $crawler = $this->client->request('POST', '/users/create');
+        $crawler = $client->request('GET', '/users/create');
 
         $form = $crawler->selectButton('Ajouter')->form();
 
@@ -93,9 +95,9 @@ class UserControllerTest extends AuthenticatorLogin
         $form['user[email]'] = $string.'@email.com';
         $form['user[roles]'] = ['ROLE_USER'];
 
-        $this->client->submit($form);
+        $client->submit($form);
 
-        $crawler = $this->client->followRedirect();
+        $crawler = $client->followRedirect();
 
         $this->assertSame(1, $crawler->filter('div.alert.alert-dismissible.alert-success')->count());
     }
@@ -105,18 +107,18 @@ class UserControllerTest extends AuthenticatorLogin
      */
     public function testEditPasswordForm()
     {
-        $this->logInUser();
+        $client = static::LoginUser();
 
-        $crawler = $this->client->request('POST', '/user/password/98');
+        $crawler = $client->request('POST', '/user/password/1');
 
         $form = $crawler->selectButton('Modifier')->form();
 
         $form['user_edit_password[password][first]'] = 'azertyui';
         $form['user_edit_password[password][second]'] = 'azertyui';
 
-        $this->client->submit($form);
+        $client->submit($form);
 
-        $crawler = $this->client->followRedirect();
+        $crawler = $client->followRedirect();
 
         $this->assertSame(1, $crawler->filter('div.alert.alert-dismissible.alert-success')->count());
     }
@@ -126,23 +128,25 @@ class UserControllerTest extends AuthenticatorLogin
      */
     public function testEditUserForm()
     {
-        $this->logInUser();
+        $client = static::LoginUser();
 
-        $crawler = $this->client->request('POST', '/users/98/edit');
+        $crawler = $client->request('POST', '/users/edit/1');
 
         $form = $crawler->selectButton('Modifier')->form();
 
         $string = str_shuffle('azertyuiopqsdfghjklm12345');
 
         $form['user_edit[username]'] = 'test';
+        $form['user_edit[password][first]'] = 'password';
+        $form['user_edit[password][second]'] = 'password';
         $form['user_edit[email]'] = $string.'@email.com';
         $form['user_edit[roles]'] = 'ROLE_USER';
 
-        $this->client->submit($form);
+        $client->submit($form);
 
-        $crawler = $this->client->followRedirect();
+        $crawler = $client->followRedirect();
 
-        $this->assertSame(1, $crawler->filter('html:contains("L\'utilisateur a bien été modifié")')->count());
+        $this->assertSame(1, $crawler->filter('div.alert.alert-dismissible.alert-success')->count());
     }
 
     /**
@@ -150,9 +154,11 @@ class UserControllerTest extends AuthenticatorLogin
      */
     public function testDeleteUserIfNoLogin()
     {
-        $this->client->request('GET', '/delete/user/98');
+        $client = static::LoginUser();
 
-        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $client->request('GET', '/delete/user/1');
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 
     /**
@@ -160,11 +166,11 @@ class UserControllerTest extends AuthenticatorLogin
      */
     public function testDeleteUser()
     {
-        $this->logInUser();
+        $client = static::LoginUser();
 
-        $this->client->request('GET', '/delete/user/98');
+        $client->request('GET', '/delete/user/1');
 
-        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 
     /**
@@ -172,22 +178,23 @@ class UserControllerTest extends AuthenticatorLogin
      */
     public function testUserEditRedirectionIfNoLogin()
     {
-        $this->client->request('GET', '/users/98/edit');
+        $client = static::createClient();
 
-        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $client->request('GET', '/users/edit/1');
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
-
 
     /**
      *
      */
     public function testUserEditPageIsFound()
     {
-        $this->logInUser();
+        $client = static::LoginUser();
 
-        $crawler = $this->client->request('GET', '/users/98/edit');
+        $crawler = $client->request('GET', '/users/edit/1');
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         $this->assertSame(1, $crawler->filter('html:contains("Modifier")')->count());
     }
@@ -197,11 +204,11 @@ class UserControllerTest extends AuthenticatorLogin
      */
     public function testUserEditRedirection()
     {
-        $this->logInUser();
+        $client = static::LoginUser();
 
-        $this->client->request('POST', '/users/98/edit');
+        $client->request('POST', '/users/edit/1');
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
     /**
@@ -209,9 +216,11 @@ class UserControllerTest extends AuthenticatorLogin
      */
     public function testUserPasswordRedirectionIfNoLogin()
     {
-        $this->client->request('GET', '/user/password/3');
+        $client = static::createClient();
 
-        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $client->request('GET', '/user/password/3');
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 
     /**
@@ -219,11 +228,11 @@ class UserControllerTest extends AuthenticatorLogin
      */
     public function testUserPasswordPageIsFound()
     {
-        $this->logInUser();
+        $client = static::LoginUser();
 
-        $crawler = $this->client->request('GET', '/user/password/98');
+        $crawler = $client->request('GET', '/user/password/1');
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         $this->assertSame(1, $crawler->filter('html:contains("Modifier le mot de passe de")')->count());
     }
@@ -233,10 +242,10 @@ class UserControllerTest extends AuthenticatorLogin
      */
     public function testUserPasswordRedirection()
     {
-        $this->logInUser();
+        $client = static::LoginUser();
 
-        $this->client->request('POST', '/user/password/98');
+        $client->request('POST', '/user/password/1');
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 }

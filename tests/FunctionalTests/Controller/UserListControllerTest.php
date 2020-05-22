@@ -2,25 +2,28 @@
 
 namespace App\Tests\FunctionalTests\Controller;
 
-use App\Tests\FunctionalTests\AuthenticatorLogin;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\Tests\FunctionalTests\AuthenticationTrait;
 
 /**
  * Class UserListControllerTest
  *
  * @package App\Tests\FunctionalTests\Controller
  */
-class UserListControllerTest extends AuthenticatorLogin
+class UserListControllerTest extends WebTestCase
 {
+    use AuthenticationTrait;
+
     /**
      *
      */
     public function testUserList()
     {
-        $this->logInUser();
+        $client = static::LoginUser();
 
-        $crawler = $this->client->request('GET', '/users');
+        $crawler = $client->request('GET', '/users/list');
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         $this->assertSame(1, $crawler->filter('html:contains("Nom d\'utilisateur")')->count());
     }
@@ -30,8 +33,10 @@ class UserListControllerTest extends AuthenticatorLogin
      */
     public function testUserListRedirectionIfNoLogin()
     {
-        $this->client->request('GET', '/users');
+        $client = static::CreateClient();
 
-        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $client->request('GET', '/users/list');
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 }

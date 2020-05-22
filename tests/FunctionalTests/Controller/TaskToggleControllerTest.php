@@ -2,23 +2,28 @@
 
 namespace App\Tests\FunctionalTests\Controller;
 
-use App\Tests\FunctionalTests\AuthenticatorLogin;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\Tests\FunctionalTests\AuthenticationTrait;
 
 /**
  * Class TaskToggleControllerTest
  *
  * @package App\Tests\FunctionalTests\Controller
  */
-class TaskToggleControllerTest extends AuthenticatorLogin
+class TaskToggleControllerTest extends WebTestCase
 {
+    use AuthenticationTrait;
+
     /**
      *
      */
     public function testTaskToggleRedirectionIfNoLogin()
     {
-        $this->client->request('GET', '/tasks/10/switch');
+        $client = static::createClient();
 
-        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $client->request('GET', '/tasks/10/switch');
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 
     /**
@@ -26,11 +31,11 @@ class TaskToggleControllerTest extends AuthenticatorLogin
      */
     public function testToggleTask()
     {
-        $this->logInUser();
+        $client = static::createAuthenticatedClient();
 
-        $this->client->request('GET', '/tasks/10/switch');
+        $client->request('GET', '/tasks/10/switch');
 
-        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 
     /**
@@ -38,12 +43,13 @@ class TaskToggleControllerTest extends AuthenticatorLogin
      */
     public function testToggleTaskIfError()
     {
-        if (!$this->logIn()) {
+        $client = static::createAuthenticatedClient();
 
-            $this->client->request('GET', '/tasks/56/toggle');
+        if (!$client) {
 
-            $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+            $client->request('GET', '/tasks/56/toggle');
+
+            $this->assertEquals(302, $client->getResponse()->getStatusCode());
         }
-
     }
 }

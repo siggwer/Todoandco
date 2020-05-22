@@ -38,8 +38,7 @@ class UserTypeTest extends TypeTestCase
         $user->setPassword('password');
         $user->setEmail('test@test.com');
         $user->setRoles(['test']);
-        dd($user->setPassword('password'));
-        exit;
+
         $form->submit($formData);
 
         $this->assertEquals($user, $userToCompare);

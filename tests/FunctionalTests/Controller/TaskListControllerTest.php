@@ -2,9 +2,8 @@
 
 namespace App\Tests\FunctionalTests\Controller;
 
-
-use App\Tests\FunctionalTests\AuthenticationTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\Tests\FunctionalTests\AuthenticationTrait;
 
 /**
  * Class TaskListControllerTest
@@ -37,6 +36,7 @@ class TaskListControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/tasks/list');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
         $this->assertSame(1, $crawler->filter('html:contains("Créer une tâche")')->count());
     }
 
@@ -54,8 +54,7 @@ class TaskListControllerTest extends WebTestCase
         $crawler = $client->click($link);
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        dd($crawler);
-        exit;
-        $this->assertSame(1, $crawler->filter('html:contains("Liste des tâches terminées")')->count());
+
+        $this->assertSame(1, $crawler->filter('html:contains("Tâches terminées")')->count());
     }
 }

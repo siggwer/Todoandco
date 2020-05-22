@@ -60,4 +60,24 @@ trait AuthenticationTrait
 
         return $client;
     }
+
+    /**
+     * @return KernelBrowser
+     */
+    public static function logInUser(): KernelBrowser
+    {
+        $client = static::createClient();
+
+        $session = $client->getContainer()->get('session');
+        $user = 'admin';
+
+        $token = new UsernamePasswordToken($user, null, 'main', ['ROLE_ADMIN']);
+        $session->set('_security_'.'main', serialize($token));
+        $session->save();
+
+        $cookie = new Cookie($session->getName(), $session->getId());
+        $client->getCookieJar()->set($cookie);
+
+        return $client;
+    }
 }
