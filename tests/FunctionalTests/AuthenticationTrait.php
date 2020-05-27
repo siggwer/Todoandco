@@ -49,7 +49,6 @@ trait AuthenticationTrait
             $user->getRoles()
         );
 
-
         $session->set('_security_' . $firewallContext, serialize($token));
 
         $session->save();

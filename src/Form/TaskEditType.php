@@ -8,11 +8,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractType;
 
 /**
- * Class TaskType
+ * Class TaskCreateType
  *
  * @package App\Form
  */
-class TaskType extends AbstractType
+class TaskEditType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder

@@ -18,8 +18,8 @@ use Doctrine\ORM\ORMException;
 use Twig\Error\RuntimeError;
 use Twig\Error\LoaderError;
 use Twig\Error\SyntaxError;
+use App\Form\TaskEditType;
 use App\Voter\TaskVoter;
-use App\Form\TaskType;
 use Twig\Environment;
 use App\Entity\Task;
 
@@ -115,16 +115,17 @@ class TaskEditController
         TaskEditHandler $taskEditHandler
     ) {
         if ($this->authorization->isGranted(TaskVoter::EDIT, $task) === true) {
-            $form = $this->formFactory->create(TaskType::class, $task)
+
+            $form = $this->formFactory->create(TaskEditType::class, $task)
                 ->handleRequest($request);
 
             if ($taskEditHandler->handle($form)) {
+
                 return new RedirectResponse(
                     $this->urlGenerator->generate('task_list'),
                     RedirectResponse::HTTP_FOUND
                 );
             }
-
             return new Response(
                 $this->twig->render(
                     'task/edit.html.twig',

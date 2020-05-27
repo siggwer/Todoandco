@@ -47,10 +47,11 @@ class TaskEditHandler
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function handle(FormInterface $form)
+    public function handle(FormInterface $form): bool
     {
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->repository->update();
+
+            $this->repository->updateTask();
 
             $this->messageFlash->getFlashBag()->add('success', 'La tâche a bien été modifiée.');
 

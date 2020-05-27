@@ -1,33 +1,35 @@
 <?php
 
-namespace App\Tests\UnitTests\FormHandler;
+namespace App\Tests\UnitTests\Handler;
 
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Doctrine\ORM\OptimisticLockException;
 use Symfony\Component\Form\FormInterface;
-use App\Handler\UserEditPasswordHandler;
+use Doctrine\ORM\OptimisticLockException;
 use App\Repository\UserRepository;
+use App\Handler\UserCreateHandler;
 use PHPUnit\Framework\TestCase;
 use Doctrine\ORM\ORMException;
 use App\Entity\User;
 
 /**
- * Class EditPasswordHandlerUnitTest
+ * Class CreateUserHandlerUnitTest
  *
  * @package App\Tests\UnitTests\FormHandler
  */
-class EditPasswordHandlerUnitTest extends TestCase
+class CreateUserHandlerUnitTest extends TestCase
 {
     /**
      * @var
      */
     private $repository;
+
     /**
      * @var
      */
     private $passwordEncoder;
+
     /**
      * @var
      */
@@ -48,13 +50,13 @@ class EditPasswordHandlerUnitTest extends TestCase
      */
     public function testConstruct()
     {
-        $handler = new UserEditPasswordHandler(
+        $handler = new UserCreateHandler(
             $this->repository,
             $this->passwordEncoder,
             $this->messageFlash
         );
 
-        static::assertInstanceOf(UserEditPasswordHandler::class, $handler);
+        static::assertInstanceOf(UserCreateHandler::class, $handler);
     }
 
     /**
@@ -64,19 +66,24 @@ class EditPasswordHandlerUnitTest extends TestCase
     public function testHandleIfReturnTrue()
     {
         $form = $this->createMock(FormInterface::class);
+
         $user = $this->createMock(User::class);
 
-        if ($form->method('isSubmitted')
-                ->willReturn(true) && $form->method('isValid')
+        $this->passwordEncoder->method('encodePassword')
+            ->willReturn('$2y$10$EIt8vwi9JcNZFp4tCJQWEuGHRXKTh96sp4nr69gp1qRsxXN364zVu');
+
+        if ($form->method('isValid')
+                ->willReturn(true) && $form->method('isSubmitted')
                 ->willReturn(true)) {
 
-            $handler = new UserEditPasswordHandler(
+            $handler = new UserCreateHandler(
                 $this->repository,
                 $this->passwordEncoder,
                 $this->messageFlash
             );
 
             $addFlash = $this->createMock(FlashBagInterface::class);
+
             $addFlash->method('add')->willReturn('test');
 
             $this->messageFlash->method('getFlashBag')->willReturn($addFlash);
@@ -92,9 +99,10 @@ class EditPasswordHandlerUnitTest extends TestCase
     public function testHandleIfReturnFalse()
     {
         $form = $this->createMock(FormInterface::class);
+
         $user = $this->createMock(User::class);
 
-        $handler = new UserEditPasswordHandler(
+        $handler = new UserCreateHandler(
             $this->repository,
             $this->passwordEncoder,
             $this->messageFlash

@@ -2,6 +2,8 @@
 
 namespace App\Form;
 
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -32,6 +34,21 @@ class UserCreateType extends AbstractType
             )
 
             ->add(
+                'password',
+                RepeatedType::class,
+                [
+                    'type' => PasswordType::class,
+                    'required' => true,
+                    'first_options'  => [
+                        'label' => 'Mot de passe'
+                    ],
+                    'second_options' => [
+                        'label' => 'Tapez le mot de passe à nouveau'
+                    ],
+                ]
+            )
+
+            ->add(
                 'email',
                 EmailType::class,
                 [
@@ -49,7 +66,7 @@ class UserCreateType extends AbstractType
                         'Administrateur' => 'ROLE_ADMIN'
                     ],
                     'multiple' => true,
-                    'expanded' =>false
+                    'expanded' => false
                 ]
             );
     }

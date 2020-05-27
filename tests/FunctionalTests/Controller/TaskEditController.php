@@ -14,6 +14,17 @@ class TaskEditController extends WebTestCase
 {
     use AuthenticationTrait;
 
+    public function testEditTaskPageIsFound()
+    {
+        $client = static::createAuthenticatedClient();
+
+        $crawler = $client->request('GET', '/tasks/edit/1');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $this->assertSame(1, $crawler->filter('html:contains("Modifier")')->count());
+    }
+
     /**
      *
      */
@@ -25,8 +36,8 @@ class TaskEditController extends WebTestCase
 
         $form = $crawler->selectButton('Modifier')->form();
 
-        $form['task[title]'] = 'functional test title';
-        $form['task[content]'] = 'functional test content';
+        $form['task_edit[title]'] = 'functional test title';
+        $form['task_edit[content]'] = 'functional test content';
 
         $client->submit($form);
 

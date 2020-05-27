@@ -3,7 +3,7 @@
 namespace App\Tests\UnitTests\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
-use App\Controller\TaskDoneController;
+use App\Controller\TaskListController;
 use App\Repository\TaskRepository;
 use PHPUnit\Framework\TestCase;
 use Twig_Error_Runtime;
@@ -12,25 +12,25 @@ use Twig_Error_Syntax;
 use Twig\Environment;
 
 /**
- * Class TaskDoneControllerUnitTest
+ * Class TaskListControllerTest
  *
  * @package App\Tests\UnitTests\Controller
  */
-class TaskDoneControllerUnitTest extends TestCase
+class TaskListControllerTest extends TestCase
 {
     /**
      * @throws Twig_Error_Loader
      * @throws Twig_Error_Runtime
      * @throws Twig_Error_Syntax
      */
-    public function testTaskDoneResponse()
+    public function testTaskListResponse()
     {
         $twig = $this->createMock(Environment::class);
         $repository = $this->createMock(TaskRepository::class);
 
-        $taskDoneController = new TaskDoneController();
+        $taskController = new TaskListController();
 
         $this->assertInstanceOf(Response::class,
-            $taskDoneController->taskDone($repository, $twig));
+            $taskController->tasksList($repository, $twig));
     }
 }

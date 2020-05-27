@@ -92,6 +92,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      * @param Request $request
      *
      * @return array|mixed
+     *
+     * @codeCoverageIgnore
      */
     public function getCredentials(Request $request)
     {
@@ -113,6 +115,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      * @param UserProviderInterface $userProvider
      *
      * @return object|UserInterface|null
+     *
+     * @codeCoverageIgnore
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
@@ -136,6 +140,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
      * @param UserInterface $user
      *
      * @return bool
+     *
+     * @codeCoverageIgnore
      */
     public function checkCredentials($credentials, UserInterface $user)
     {

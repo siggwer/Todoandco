@@ -19,7 +19,7 @@ use App\Entity\Task;
 class TaskSwitchController
 {
     /**
-     * @Route(path="/tasks/{id}/switch", name="task_switch", methods={"GET"})
+     * @Route(path="/tasks/switch/{id}", name="task_switch", methods={"GET"})
      * @param                            Task                  $task
      * @param                            TaskRepository        $repository
      * @param                            UrlGeneratorInterface $urlGenerator
@@ -38,7 +38,7 @@ class TaskSwitchController
     ) {
         $task->switch(!$task->isDone());
 
-        $repository->update();
+        $repository->updateTask();
 
         if ($task->isDone() == false) {
             $messageFlash->getFlashBag()->add(

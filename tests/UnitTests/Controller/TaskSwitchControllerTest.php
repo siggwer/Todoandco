@@ -13,18 +13,17 @@ use App\Entity\Task;
 use Exception;
 
 /**
- * Class TaskSwitchControllerUnitTest
+ * Class TaskSwitchControllerTest
  *
  * @package App\Tests\UnitTests\Controller
  */
-class TaskSwitchControllerUnitTest extends TestCase
+class TaskSwitchControllerTest extends TestCase
 {
     /**
      * @throws Exception
      */
-    public function testToggleTaskResponse()
+    public function testSwitchTaskResponse()
     {
-
         $task = $this->createMock(Task::class);
 
         $repository = $this->createMock(TaskRepository::class);
@@ -47,7 +46,7 @@ class TaskSwitchControllerUnitTest extends TestCase
     /**
      * @throws Exception
      */
-    public function testToggleTaskRedirect()
+    public function testSwitchaskRedirect()
     {
         $task = $this->createMock(Task::class);
 

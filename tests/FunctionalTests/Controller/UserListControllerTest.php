@@ -17,6 +17,24 @@ class UserListControllerTest extends WebTestCase
     /**
      *
      */
+    public function testGetListUserPageFromHomePage()
+    {
+        $client = static::logInUser();
+
+        $crawler = $client->request('GET', '/');
+
+        $link = $crawler->selectLink('Gérer les utilisateurs')->link();
+
+        $crawler = $client->click($link);
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $this->assertSame(1, $crawler->filter('html:contains("Nom d\'utilisateur")')->count());
+    }
+
+    /**
+     *
+     */
     public function testUserList()
     {
         $client = static::LoginUser();

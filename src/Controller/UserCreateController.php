@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -10,10 +11,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use App\Handler\UserCreateHandler;
 use App\Repository\UserRepository;
+use App\Form\UserCreateType;
 use Twig\Error\RuntimeError;
 use Twig\Error\LoaderError;
 use Twig\Error\SyntaxError;
-use App\Form\UserType;
 use Twig\Environment;
 use App\Entity\User;
 
@@ -80,7 +81,7 @@ class UserCreateController
     {
         $user = new User();
 
-        $form = $this->formFactory->create(UserType::class, $user)
+        $form = $this->formFactory->create(UserCreateType::class, $user)
             ->handleRequest($request);
 
         if ($userCreateHandler->handle($form, $user)) {

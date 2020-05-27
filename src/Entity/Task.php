@@ -25,7 +25,7 @@ class Task
      *
      * @ORM\Column(type="datetime_immutable")
      *
-     * @Assert\DateTime()
+     * @Assert\Date()
      */
     private $createdAt;
 

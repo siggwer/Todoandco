@@ -2,16 +2,18 @@
 
 namespace App\Controller;
 
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\OptimisticLockException;
 use App\Repository\UserRepository;
 use App\Handler\UserEditHandler;
-use Twig\Error\LoaderError;
+use Doctrine\ORM\ORMException;
 use Twig\Error\RuntimeError;
+use Twig\Error\LoaderError;
 use Twig\Error\SyntaxError;
 use App\Form\UserEditType;
 use Twig\Environment;
@@ -67,8 +69,8 @@ class UserEditController
     /**
      * @Route(path="/users/edit/{id}", name="user_edit", methods={"GET", "POST"})
      *
-     * @param User            $user
-     * @param Request         $request
+     * @param User $user
+     * @param Request $request
      * @param UserEditHandler $UserEditHandler
      *
      * @return RedirectResponse|Response
@@ -76,14 +78,15 @@ class UserEditController
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function userEdit(
         User $user,
         Request $request,
         UserEditHandler $UserEditHandler
     ) {
-        $form = $this->formFactory->create(UserEditType::class, $user)
-            ->handleRequest($request);
+        $form = $this->formFactory->create(UserEditType::class, $user)->handleRequest($request);
 
         if ($UserEditHandler->handle($form)) {
             return new RedirectResponse(

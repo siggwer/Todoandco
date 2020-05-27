@@ -2,25 +2,31 @@
 
 namespace App\Tests\FunctionalTests\Controller;
 
-use App\Tests\FunctionalTests\AuthenticatorLogin;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\Tests\FunctionalTests\AuthenticationTrait;
 
 /**
  * Class SecurityControllerTest
  *
  * @package App\Tests\FunctionalTests\Controller
  */
-class SecurityControllerTest extends AuthenticatorLogin
+class SecurityControllerTest extends WebTestCase
 {
+    use AuthenticationTrait;
+
     /**
      *
      */
     public function testLogin()
     {
-        $crawler = $this->client->request('GET', '/login');
+        $client = static::createClient();
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $crawler = $client->request('GET', '/login');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         $this->assertSame(1, $crawler->filter('html:contains("Nom d\'utilisateur")')->count());
+
         $this->assertSame(1, $crawler->filter('html:contains("Mot de passe")')->count());
     }
 }

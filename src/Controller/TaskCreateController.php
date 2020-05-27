@@ -16,7 +16,7 @@ use App\Repository\TaskRepository;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 use Twig\Error\LoaderError;
-use App\Form\TaskType;
+use App\Form\TaskCreateType;
 use Twig\Environment;
 use App\Entity\Task;
 
@@ -109,7 +109,7 @@ class TaskCreateController
     ) {
         $task = new Task();
 
-        $form = $this->formFactory->create(TaskType::class, $task)
+        $form = $this->formFactory->create(TaskCreateType::class, $task)
             ->handleRequest($request);
 
         if ($taskCreateHandler->handle($form, $task)) {

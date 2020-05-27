@@ -37,9 +37,7 @@ class TaskCreateController extends WebTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $this->assertSame(
-            1,
-            $crawler->filter('html:contains("Créer une tâche")')->count());
+        $this->assertSame(1, $crawler->filter('html:contains("Créer une tâche")')->count());
     }
 
     /**
@@ -68,8 +66,8 @@ class TaskCreateController extends WebTestCase
         $crawler = $client->click($link);
 
         $form = $crawler->selectButton('Ajouter')->form();
-        $form['task[title]'] = 'functional test title';
-        $form['task[content]'] = 'functional test content';
+        $form['task_create[title]'] = 'functional test title';
+        $form['task_createS[content]'] = 'functional test content';
 
         $client->submit($form);
 

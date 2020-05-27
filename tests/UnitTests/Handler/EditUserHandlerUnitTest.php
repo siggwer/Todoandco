@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\UnitTests\FormHandler;
+namespace App\Tests\UnitTests\Handler;
 
 use Symfony\Component\HttpFoundation\Session\Session;
 use Doctrine\ORM\OptimisticLockException;

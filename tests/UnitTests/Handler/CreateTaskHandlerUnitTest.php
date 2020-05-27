@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\UnitTests\FormHandler;
+namespace App\Tests\UnitTests\Handler;
 
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -63,6 +63,7 @@ class CreateTaskHandlerUnitTest extends TestCase
     public function testHandleIfReturnTrue()
     {
         $form = $this->createMock(FormInterface::class);
+
         $task = $this->createMock(Task::class);
 
         $handler = new TaskCreateHandler(
@@ -81,6 +82,7 @@ class CreateTaskHandlerUnitTest extends TestCase
     public function testHandleIfReturnFalse()
     {
         $form = $this->createMock(FormInterface::class);
+
         $task = $this->createMock(Task::class);
 
         $handler = new TaskCreateHandler(

@@ -21,7 +21,7 @@ class TaskToggleControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET', '/tasks/10/switch');
+        $client->request('GET', '/tasks/switch/1');
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
@@ -33,7 +33,7 @@ class TaskToggleControllerTest extends WebTestCase
     {
         $client = static::createAuthenticatedClient();
 
-        $client->request('GET', '/tasks/10/switch');
+        $client->request('GET', '/tasks/switch/1');
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
@@ -47,7 +47,7 @@ class TaskToggleControllerTest extends WebTestCase
 
         if (!$client) {
 
-            $client->request('GET', '/tasks/56/toggle');
+            $client->request('GET', '/tasks/toggle/56');
 
             $this->assertEquals(302, $client->getResponse()->getStatusCode());
         }

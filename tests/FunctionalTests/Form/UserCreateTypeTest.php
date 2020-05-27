@@ -3,15 +3,15 @@
 namespace App\Tests\FunctionalTests\Form;
 
 use Symfony\Component\Form\Test\TypeTestCase;
-use App\Form\UserType;
+use App\Form\UserCreateType;
 use App\Entity\User;
 
 /**
- * Class UserTypeTest
+ * Class UserCreateTypeTest
  *
  * @package App\Tests\FunctionalTests\Form
  */
-class UserTypeTest extends TypeTestCase
+class UserCreateTypeTest extends TypeTestCase
 {
     /**
      *
@@ -30,7 +30,7 @@ class UserTypeTest extends TypeTestCase
 
         $userToCompare = $this->createMock(User::class);
 
-        $form = $this->factory->create(UserType::class, $userToCompare);
+        $form = $this->factory->create(UserCreateType::class, $userToCompare);
 
         $user = $this->createMock(User::class);
 

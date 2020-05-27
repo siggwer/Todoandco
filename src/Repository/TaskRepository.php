@@ -52,7 +52,7 @@ class TaskRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function update()
+    public function updateTask()
     {
         $this->_em->flush();
     }

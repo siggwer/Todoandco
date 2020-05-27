@@ -15,14 +15,8 @@ use LogicException;
  */
 class TaskVoter extends Voter
 {
-    /**
-     *
-     */
     const EDIT = 'edit';
 
-    /**
-     *
-     */
     const DELETE = 'delete';
 
     /**
@@ -51,7 +45,7 @@ class TaskVoter extends Voter
      *
      * @return bool
      */
-    protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
+    protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
 
@@ -76,6 +70,8 @@ class TaskVoter extends Voter
      * @param User $user
      *
      * @return bool
+     *
+     * @codeCoverageIgnore
      */
     private function canEdit(Task $task, User $user): bool
     {
@@ -87,8 +83,10 @@ class TaskVoter extends Voter
      * @param User $user
      *
      * @return bool
+     *
+     * @codeCoverageIgnore
      */
-    private function canDelete(Task $task, User $user)
+    private function canDelete(Task $task, User $user): bool
     {
         if ($task->getUser() === null & $user->getRoles() === ['ROLE_ADMIN'] or $user === $task->getUser()) {
             return true;

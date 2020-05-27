@@ -9,11 +9,11 @@ use PHPUnit\Framework\TestCase;
 use Twig\Environment;
 
 /**
- * Class UserListControllerUnitTest
+ * Class UserListControllerTest
  *
  * @package App\Tests\UnitTests\Controller
  */
-class UserListControllerUnitTest extends TestCase
+class UserListControllerTest extends TestCase
 {
     /**
      * @throws \Twig\Error\LoaderError

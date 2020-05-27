@@ -6,13 +6,14 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\HttpFoundation\Response;
 use App\Controller\SecurityController;
 use PHPUnit\Framework\TestCase;
+use Twig\Environment;
 
 /**
- * Class SecurityControllerUnitTest
+ * Class SecurityControllerTest
  *
  * @package App\Tests\UnitTests\Controller
  */
-class SecurityControllerUnitTest extends TestCase
+class SecurityControllerTest extends TestCase
 {
     /**
      *
@@ -20,10 +21,13 @@ class SecurityControllerUnitTest extends TestCase
     public function testLoginResponse()
     {
         $authentication = $this->createMock(AuthenticationUtils::class);
+        $twig = $this->createMock(Environment::class);
 
         $controller = new SecurityController();
 
-        static::assertInstanceOf(Response::class, $controller->login($authentication));
+        static::assertInstanceOf(
+            Response::class,
+            $controller->login($authentication, $twig)
+        );
     }
-
 }

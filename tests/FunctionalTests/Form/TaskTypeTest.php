@@ -3,7 +3,7 @@
 namespace App\Tests\FunctionalTests\Form;
 
 use Symfony\Component\Form\Test\TypeTestCase;
-use App\Form\TaskType;
+use App\Form\TaskCreateType;
 use App\Entity\Task;
 
 /**
@@ -26,7 +26,7 @@ class TaskTypeTest extends TypeTestCase
 
         $taskToCompare = $this->createMock(Task::class);
 
-        $form = $this->factory->create(TaskType::class, $taskToCompare);
+        $form = $this->factory->create(TaskCreateType::class, $taskToCompare);
 
         $task = $this->createMock(Task::class);
         $task->setTitle('test');

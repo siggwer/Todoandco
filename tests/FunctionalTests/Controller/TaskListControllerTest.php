@@ -55,6 +55,6 @@ class TaskListControllerTest extends WebTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
-        $this->assertSame(1, $crawler->filter('html:contains("Tâches terminées")')->count());
+        $this->assertSame(1, $crawler->filter('html:contains("Il n\'y a pas de tâches à afficher")')->count());
     }
 }

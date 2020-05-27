@@ -1,24 +1,24 @@
 <?php
 
-namespace App\Tests\UnitTests\FormHandler;
+namespace App\Tests\UnitTests\Handler;
 
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Form\FormInterface;
 use Doctrine\ORM\OptimisticLockException;
+use Symfony\Component\Form\FormInterface;
+use App\Handler\UserEditPasswordHandler;
 use App\Repository\UserRepository;
-use App\Handler\UserCreateHandler;
 use PHPUnit\Framework\TestCase;
 use Doctrine\ORM\ORMException;
 use App\Entity\User;
 
 /**
- * Class CreateUserHandlerUnitTest
+ * Class EditPasswordHandlerUnitTest
  *
  * @package App\Tests\UnitTests\FormHandler
  */
-class CreateUserHandlerUnitTest extends TestCase
+class EditPasswordHandlerUnitTest extends TestCase
 {
     /**
      * @var
@@ -48,13 +48,13 @@ class CreateUserHandlerUnitTest extends TestCase
      */
     public function testConstruct()
     {
-        $handler = new UserCreateHandler(
+        $handler = new UserEditPasswordHandler(
             $this->repository,
             $this->passwordEncoder,
             $this->messageFlash
         );
 
-        static::assertInstanceOf(UserCreateHandler::class, $handler);
+        static::assertInstanceOf(UserEditPasswordHandler::class, $handler);
     }
 
     /**
@@ -64,13 +64,17 @@ class CreateUserHandlerUnitTest extends TestCase
     public function testHandleIfReturnTrue()
     {
         $form = $this->createMock(FormInterface::class);
+
         $user = $this->createMock(User::class);
 
-        if ($form->method('isValid')
-                ->willReturn(true) && $form->method('isSubmitted')
+        $this->passwordEncoder->method('encodePassword')
+            ->willReturn('$2y$10$EIt8vwi9JcNZFp4tCJQWEuGHRXKTh96sp4nr69gp1qRsxXN364zVu');
+
+        if ($form->method('isSubmitted')
+                ->willReturn(true) && $form->method('isValid')
                 ->willReturn(true)) {
 
-            $handler = new UserCreateHandler(
+            $handler = new UserEditPasswordHandler(
                 $this->repository,
                 $this->passwordEncoder,
                 $this->messageFlash
@@ -94,7 +98,7 @@ class CreateUserHandlerUnitTest extends TestCase
         $form = $this->createMock(FormInterface::class);
         $user = $this->createMock(User::class);
 
-        $handler = new UserCreateHandler(
+        $handler = new UserEditPasswordHandler(
             $this->repository,
             $this->passwordEncoder,
             $this->messageFlash
