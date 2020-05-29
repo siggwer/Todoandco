@@ -6,11 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use App\Tests\FunctionalTests\AuthenticationTrait;
 
 /**
- * Class TaskEditController
+ * Class TaskEditControllerTest
  *
  * @package App\Tests\FunctionalTests\Controller
  */
-class TaskEditController extends WebTestCase
+class TaskEditControllerTest extends WebTestCase
 {
     use AuthenticationTrait;
 
@@ -22,7 +22,7 @@ class TaskEditController extends WebTestCase
     {
         $client = static::createAuthenticatedClient();
 
-        $crawler = $client->request('GET', '/tasks/edit/1');
+        $crawler = $client->request('GET', '/tasks/edit/2');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
@@ -36,7 +36,7 @@ class TaskEditController extends WebTestCase
     {
         $client = static::createAuthenticatedClient();
 
-        $crawler = $client->request('GET', '/tasks/edit/1');
+        $crawler = $client->request('GET', '/tasks/edit/3');
 
         $form = $crawler->selectButton('Modifier')->form();
 
@@ -57,7 +57,7 @@ class TaskEditController extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET', '/tasks/edit/1');
+        $client->request('GET', '/tasks/edit/4');
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
@@ -69,7 +69,7 @@ class TaskEditController extends WebTestCase
     {
         $client = static::createAuthenticatedClient();
 
-        $crawler = $client->request('GET', '/tasks/edit/1');
+        $crawler = $client->request('GET', '/tasks/edit/5');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
@@ -83,7 +83,7 @@ class TaskEditController extends WebTestCase
     {
         $client = static::createAuthenticatedClient();
 
-        $client->request('POST', "/tasks/edit/1");
+        $client->request('POST', "/tasks/edit/6");
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }

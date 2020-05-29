@@ -46,7 +46,7 @@ class UserEditControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET', '/users/edit/1');
+        $client->request('GET', '/users/edit/2');
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
@@ -58,7 +58,7 @@ class UserEditControllerTest extends WebTestCase
     {
         $client = static::LoginUser();
 
-        $crawler = $client->request('GET', '/users/edit/1');
+        $crawler = $client->request('GET', '/users/edit/3');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
@@ -72,7 +72,7 @@ class UserEditControllerTest extends WebTestCase
     {
         $client = static::LoginUser();
 
-        $client->request('POST', '/users/edit/1');
+        $client->request('POST', '/users/edit/4');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }

@@ -6,25 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use App\Tests\FunctionalTests\AuthenticationTrait;
 
 /**
- * Class TaskCreateController
+ * Class TaskCreateControllerTest
  *
  * @package App\Tests\FunctionalTests\Controller
  */
-class TaskCreateController extends WebTestCase
+class TaskCreateControllerTest extends WebTestCase
 {
     use AuthenticationTrait;
-
-    /**
-     *
-     */
-    public function testCreateTaskRedirectionIfNoLogin()
-    {
-        $client = static::createClient();
-
-        $client->request('GET', '/tasks/create');
-
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
-    }
 
     /**
      *
@@ -74,5 +62,17 @@ class TaskCreateController extends WebTestCase
         $crawler = $client->followRedirect();
 
         $this->assertSame(1, $crawler->filter('div.alert.alert-dismissible.alert-success')->count());
+    }
+
+    /**
+     *
+     */
+    public function testCreateTaskRedirectionIfNoLogin()
+    {
+        $client = static::createClient();
+
+        $client->request('GET', '/tasks/create');
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 }

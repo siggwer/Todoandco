@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Task;
 
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -11,24 +11,21 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\ORM\OptimisticLockException;
+use App\Handler\TaskCreateHandler;
 use App\Repository\TaskRepository;
-use App\Handler\TaskEditHandler;
-use Doctrine\ORM\ORMException;
 use Twig\Error\RuntimeError;
-use Twig\Error\LoaderError;
 use Twig\Error\SyntaxError;
-use App\Form\TaskEditType;
-use App\Voter\TaskVoter;
+use Twig\Error\LoaderError;
+use App\Form\TaskCreateType;
 use Twig\Environment;
 use App\Entity\Task;
 
 /**
- * Class TaskEditController
+ * Class TaskCreateController
  *
  * @package App\Controller
  */
-class TaskEditController
+class TaskCreateController
 {
     /**
      * @var TaskRepository
@@ -66,7 +63,7 @@ class TaskEditController
     private $authorization;
 
     /**
-     * TaskEditController constructor.
+     * TaskCreateController constructor.
      *
      * @param TaskRepository                $repository
      * @param TokenStorageInterface         $tokenStorage
@@ -95,54 +92,38 @@ class TaskEditController
     }
 
     /**
-     * @Route(path="/tasks/edit/{id}", name="task_edit", methods={"GET","POST"})
+     * @Route(path="/tasks/create", name="task_create", methods={"GET","POST"})
      *
-     * @param Task            $task
-     * @param Request         $request
-     * @param TaskEditHandler $taskEditHandler
+     * @param Request           $request
+     * @param TaskCreateHandler $taskCreateHandler
      *
      * @return RedirectResponse|Response
      *
-     * @throws ORMException
-     * @throws OptimisticLockException
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function taskEdit(
-        Task $task,
+    public function createTask(
         Request $request,
-        TaskEditHandler $taskEditHandler
+        TaskCreateHandler $taskCreateHandler
     ) {
-        if ($this->authorization->isGranted(TaskVoter::EDIT, $task) === true) {
+        $task = new Task();
 
-            $form = $this->formFactory->create(TaskEditType::class, $task)
-                ->handleRequest($request);
+        $form = $this->formFactory->create(TaskCreateType::class, $task)
+            ->handleRequest($request);
 
-            if ($taskEditHandler->handle($form)) {
-
-                return new RedirectResponse(
-                    $this->urlGenerator->generate('task_list'),
-                    RedirectResponse::HTTP_FOUND
-                );
-            }
-            return new Response(
-                $this->twig->render(
-                    'task/edit.html.twig',
-                    [
-                        'form' => $form->createView(),
-                        'task' => $task,
-                    ]
-                ),
-                Response::HTTP_OK
+        if ($taskCreateHandler->handle($form, $task)) {
+            return new RedirectResponse(
+                $this->urlGenerator->generate('task_list'),
+                RedirectResponse::HTTP_FOUND
             );
         }
 
         return new Response(
             $this->twig->render(
-                'error/error.html.twig',
+                'task/create.html.twig',
                 [
-                    'error' => "Erreur : Impossible d'éditer cette tâche."
+                    'form' => $form->createView()
                 ]
             ),
             Response::HTTP_OK

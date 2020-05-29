@@ -21,7 +21,7 @@ class TaskSwitchControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET', '/tasks/switch/1');
+        $client->request('GET', '/tasks/switch/9');
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
@@ -33,7 +33,7 @@ class TaskSwitchControllerTest extends WebTestCase
     {
         $client = static::createAuthenticatedClient();
 
-        $client->request('GET', '/tasks/switch/1');
+        $client->request('GET', '/tasks/switch/10');
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
@@ -47,7 +47,7 @@ class TaskSwitchControllerTest extends WebTestCase
 
         if (!$client) {
 
-            $client->request('GET', '/tasks/switch/1');
+            $client->request('GET', '/tasks/switch/11');
 
             $this->assertEquals(302, $client->getResponse()->getStatusCode());
         }

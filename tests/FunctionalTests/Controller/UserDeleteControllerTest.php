@@ -21,7 +21,7 @@ class UserDeleteControllerTest extends WebTestCase
     {
         $client = static::LoginUser();
 
-        $client->request('GET', '/delete/user/1');
+        $client->request('GET', '/delete/user/9');
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
@@ -33,7 +33,7 @@ class UserDeleteControllerTest extends WebTestCase
     {
         $client = static::LoginUser();
 
-        $client->request('GET', '/delete/user/1');
+        $client->request('GET', '/delete/user/10');
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }

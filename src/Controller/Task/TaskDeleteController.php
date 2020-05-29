@@ -1,19 +1,18 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Task;
 
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Response;
+use Doctrine\ORM\OptimisticLockException;
 use App\Repository\TaskRepository;
-use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
-use Twig\Error\LoaderError;
+use Doctrine\ORM\ORMException;
 use App\Voter\TaskVoter;
 use Twig\Environment;
 use App\Entity\Task;
@@ -93,33 +92,22 @@ class TaskDeleteController
      * @Route(path="/tasks/delete/{id}", name="task_delete", methods={"GET"})
      *
      * @param Task $task
-     *
-     * @return RedirectResponse|Response
-     *
-     * @throws LoaderError
-     * @throws RuntimeError
-     * @throws SyntaxError
+     * @return RedirectResponse
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function TaskDelete(Task $task)
     {
-        if ($this->authorization->isGranted(TaskVoter::DELETE, $task) === true) {
-            $this->repository->delete($task);
-
-            $this->messageFlash->getFlashBag()->add('success', "Tâche supprimée.");
-
-            return new RedirectResponse(
-                $this->urlGenerator->generate('task_list'),
-                RedirectResponse::HTTP_FOUND
-            );
+        if ($this->authorization->isGranted(TaskVoter::DELETE, $task) === false) {
+            throw new AccessDeniedException();
         }
-        return new Response(
-            $this->twig->render(
-                'error/error.html.twig',
-                [
-                    'error' => 'Erreur : Impossible de supprimer cette tâche.'
-                ]
-            ),
-            Response::HTTP_OK
+        $this->repository->delete($task);
+
+        $this->messageFlash->getFlashBag()->add('success', "Tâche supprimée.");
+
+        return new RedirectResponse(
+            $this->urlGenerator->generate('task_list'),
+            RedirectResponse::HTTP_FOUND
         );
     }
 }

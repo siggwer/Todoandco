@@ -7,11 +7,11 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use App\Tests\FunctionalTests\AuthenticationTrait;
 
 /**
- * Class DefaultController
+ * Class DefaultControllerTest
  *
  * @package App\Tests\FunctionalTests\Controller
  */
-class DefaultController extends WebTestCase
+class DefaultControllerTest extends WebTestCase
 {
     use AuthenticationTrait;
 

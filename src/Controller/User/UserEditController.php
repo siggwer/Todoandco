@@ -1,7 +1,6 @@
 <?php
 
-namespace App\Controller;
-
+namespace App\Controller\User;
 
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -9,21 +8,23 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use App\Handler\UserCreateHandler;
+use Doctrine\ORM\OptimisticLockException;
 use App\Repository\UserRepository;
-use App\Form\UserCreateType;
+use App\Handler\UserEditHandler;
+use Doctrine\ORM\ORMException;
 use Twig\Error\RuntimeError;
 use Twig\Error\LoaderError;
 use Twig\Error\SyntaxError;
+use App\Form\UserEditType;
 use Twig\Environment;
 use App\Entity\User;
 
 /**
- * Class UserCreateController
+ * Class UserEditController
  *
  * @package App\Controller
  */
-class UserCreateController
+class UserEditController
 {
     /**
      * @var Environment
@@ -46,7 +47,7 @@ class UserCreateController
     private $repository;
 
     /**
-     * UserCreateController constructor.
+     * UserEditController constructor.
      *
      * @param Environment           $twig
      * @param FormFactoryInterface  $formFactory
@@ -66,36 +67,40 @@ class UserCreateController
     }
 
     /**
-     * @Route(path="/users/create", name="user_create", methods={"GET","POST"})
+     * @Route(path="/users/edit/{id}", name="user_edit", methods={"GET", "POST"})
      *
-     * @param Request           $request
-     * @param UserCreateHandler $userCreateHandler
+     * @param User $user
+     * @param Request $request
+     * @param UserEditHandler $UserEditHandler
      *
      * @return RedirectResponse|Response
      *
      * @throws LoaderError
      * @throws RuntimeError
      * @throws SyntaxError
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
-    public function userCreate(Request $request, UserCreateHandler $userCreateHandler)
-    {
-        $user = new User();
+    public function userEdit(
+        User $user,
+        Request $request,
+        UserEditHandler $UserEditHandler
+    ) {
+        $form = $this->formFactory->create(UserEditType::class, $user)->handleRequest($request);
 
-        $form = $this->formFactory->create(UserCreateType::class, $user)
-            ->handleRequest($request);
-
-        if ($userCreateHandler->handle($form, $user)) {
+        if ($UserEditHandler->handle($form)) {
             return new RedirectResponse(
-                $this->urlGenerator->generate('home'),
+                $this->urlGenerator->generate('user_list'),
                 RedirectResponse::HTTP_FOUND
             );
         }
 
         return new Response(
             $this->twig->render(
-                'user/create.html.twig',
+                'user/edit.html.twig',
                 [
-                    'form' => $form->createView()
+                    'form' => $form->createView(),
+                    'user' => $user
                 ]
             ),
             Response::HTTP_OK

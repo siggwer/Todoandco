@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Task;
 
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -11,21 +12,24 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use App\Handler\TaskCreateHandler;
+use Doctrine\ORM\OptimisticLockException;
 use App\Repository\TaskRepository;
+use App\Handler\TaskEditHandler;
+use Doctrine\ORM\ORMException;
 use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
 use Twig\Error\LoaderError;
-use App\Form\TaskCreateType;
+use Twig\Error\SyntaxError;
+use App\Form\TaskEditType;
+use App\Voter\TaskVoter;
 use Twig\Environment;
 use App\Entity\Task;
 
 /**
- * Class TaskCreateController
+ * Class TaskEditController
  *
  * @package App\Controller
  */
-class TaskCreateController
+class TaskEditController
 {
     /**
      * @var TaskRepository
@@ -63,7 +67,7 @@ class TaskCreateController
     private $authorization;
 
     /**
-     * TaskCreateController constructor.
+     * TaskEditController constructor.
      *
      * @param TaskRepository                $repository
      * @param TokenStorageInterface         $tokenStorage
@@ -92,41 +96,46 @@ class TaskCreateController
     }
 
     /**
-     * @Route(path="/tasks/create", name="task_create", methods={"GET","POST"})
+     * @Route(path="/tasks/edit/{id}", name="task_edit", methods={"GET","POST"})
      *
-     * @param Request           $request
-     * @param TaskCreateHandler $taskCreateHandler
-     *
+     * @param Task $task
+     * @param Request $request
+     * @param TaskEditHandler $taskEditHandler
      * @return RedirectResponse|Response
-     *
      * @throws LoaderError
+     * @throws ORMException
+     * @throws OptimisticLockException
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function createTask(
+    public function taskEdit(
+        Task $task,
         Request $request,
-        TaskCreateHandler $taskCreateHandler
+        TaskEditHandler $taskEditHandler
     ) {
-        $task = new Task();
-
-        $form = $this->formFactory->create(TaskCreateType::class, $task)
-            ->handleRequest($request);
-
-        if ($taskCreateHandler->handle($form, $task)) {
-            return new RedirectResponse(
-                $this->urlGenerator->generate('task_list'),
-                RedirectResponse::HTTP_FOUND
-            );
+        if ($this->authorization->isGranted(TaskVoter::EDIT, $task) === false) {
+            throw new AccessDeniedException();
         }
 
-        return new Response(
-            $this->twig->render(
-                'task/create.html.twig',
-                [
-                    'form' => $form->createView()
-                ]
-            ),
-            Response::HTTP_OK
-        );
+            $form = $this->formFactory->create(TaskEditType::class, $task)
+                ->handleRequest($request);
+
+            if ($taskEditHandler->handle($form)) {
+
+                return new RedirectResponse(
+                    $this->urlGenerator->generate('task_list'),
+                    RedirectResponse::HTTP_FOUND
+                );
+            }
+            return new Response(
+                $this->twig->render(
+                    'task/edit.html.twig',
+                    [
+                        'form' => $form->createView(),
+                        'task' => $task,
+                    ]
+                ),
+                Response::HTTP_OK
+            );
     }
 }

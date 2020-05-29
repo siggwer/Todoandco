@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Task;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,14 +11,14 @@ use Twig\Error\SyntaxError;
 use Twig\Environment;
 
 /**
- * Class TaskListController
+ * Class TaskDoneController
  *
  * @package App\Controller
  */
-class TaskListController
+class TaskDoneController
 {
     /**
-     * @Route(path="/tasks/list", name="task_list", methods={"GET"})
+     * @Route(path="/tasks/done", name="task_done", methods={"GET"})
      *
      * @param TaskRepository $repository
      * @param Environment    $twig
@@ -29,13 +29,17 @@ class TaskListController
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function tasksList(TaskRepository $repository, Environment $twig)
+    public function taskDone(TaskRepository $repository, Environment $twig)
     {
-        $tasks = $repository->listTask();
+        $tasks = $repository->findBy(
+            [
+                'isDone' => true
+            ]
+        );
 
         return new Response(
             $twig->render(
-                'task/list.html.twig',
+                'task/is_done.html.twig',
                 [
                     'tasks' => $tasks
                 ]

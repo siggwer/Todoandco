@@ -21,7 +21,7 @@ class TaskDeleteControllerTest extends WebTestCase
     {
         $client = static::createAuthenticatedClient();
 
-        $client->request('GET', '/tasks/delete/1');
+        $client->request('GET', '/tasks/delete/7');
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
@@ -30,7 +30,7 @@ class TaskDeleteControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET', '/tasks/delete/1');
+        $client->request('GET', '/tasks/delete/8');
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }

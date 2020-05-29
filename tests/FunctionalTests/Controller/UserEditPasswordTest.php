@@ -21,7 +21,7 @@ class UserEditPasswordTest extends WebTestCase
     {
         $client = static::LoginUser();
 
-        $crawler = $client->request('POST', '/user/password/1');
+        $crawler = $client->request('POST', '/user/password/5');
 
         $form = $crawler->selectButton('Modifier')->form();
 
@@ -42,7 +42,7 @@ class UserEditPasswordTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET', '/user/password/3');
+        $client->request('GET', '/user/password/6');
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
@@ -54,7 +54,7 @@ class UserEditPasswordTest extends WebTestCase
     {
         $client = static::LoginUser();
 
-        $crawler = $client->request('GET', '/user/password/1');
+        $crawler = $client->request('GET', '/user/password/7');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
@@ -68,7 +68,7 @@ class UserEditPasswordTest extends WebTestCase
     {
         $client = static::LoginUser();
 
-        $client->request('POST', '/user/password/1');
+        $client->request('POST', '/user/password/8');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
