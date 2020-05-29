@@ -6,11 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use App\Tests\FunctionalTests\AuthenticationTrait;
 
 /**
- * Class TaskToggleControllerTest
+ * Class TaskSwitchControllerTest
  *
  * @package App\Tests\FunctionalTests\Controller
  */
-class TaskToggleControllerTest extends WebTestCase
+class TaskSwitchControllerTest extends WebTestCase
 {
     use AuthenticationTrait;
 
@@ -29,7 +29,7 @@ class TaskToggleControllerTest extends WebTestCase
     /**
      *
      */
-    public function testToggleTask()
+    public function testSwitchTask()
     {
         $client = static::createAuthenticatedClient();
 
@@ -41,13 +41,13 @@ class TaskToggleControllerTest extends WebTestCase
     /**
      *
      */
-    public function testToggleTaskIfError()
+    public function testSwitchTaskIfError()
     {
         $client = static::createAuthenticatedClient();
 
         if (!$client) {
 
-            $client->request('GET', '/tasks/toggle/56');
+            $client->request('GET', '/tasks/switch/1');
 
             $this->assertEquals(302, $client->getResponse()->getStatusCode());
         }

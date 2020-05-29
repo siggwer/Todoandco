@@ -37,10 +37,10 @@ class TaskSwitchControllerTest extends TestCase
         $messageFlash = $this->createMock(Session::class);
         $messageFlash->method('getFlashBag')->willReturn($addFlash);
 
-        $taskToggleController = new TaskSwitchController();
+        $taskSwitchController = new TaskSwitchController();
 
         $this->assertInstanceOf(RedirectResponse::class,
-            $taskToggleController->switchTask($task, $repository, $urlGenerator, $messageFlash));
+            $taskSwitchController->switchTask($task, $repository, $urlGenerator, $messageFlash));
     }
 
     /**
@@ -61,9 +61,9 @@ class TaskSwitchControllerTest extends TestCase
         $messageFlash = $this->createMock(Session::class);
         $messageFlash->method('getFlashBag')->willReturn($addFlash);
 
-        $taskToggleController = new TaskSwitchController();
+        $taskSwitchController = new TaskSwitchController();
 
         $this->assertInstanceOf(RedirectResponse::class,
-            $taskToggleController->switchTask($task, $repository, $urlGenerator, $messageFlash));
+            $taskSwitchController->switchTask($task, $repository, $urlGenerator, $messageFlash));
     }
 }

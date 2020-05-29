@@ -67,7 +67,7 @@ class TaskCreateController extends WebTestCase
 
         $form = $crawler->selectButton('Ajouter')->form();
         $form['task_create[title]'] = 'functional test title';
-        $form['task_createS[content]'] = 'functional test content';
+        $form['task_create[content]'] = 'functional test content';
 
         $client->submit($form);
 

@@ -61,7 +61,7 @@ class EditPasswordHandlerUnitTest extends TestCase
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function testHandleIfReturnTrue()
+    public function testEditPasswordHandleIfReturnTrue()
     {
         $form = $this->createMock(FormInterface::class);
 
@@ -93,7 +93,7 @@ class EditPasswordHandlerUnitTest extends TestCase
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function testHandleIfReturnFalse()
+    public function testEditPasswordHandleIfReturnFalse()
     {
         $form = $this->createMock(FormInterface::class);
         $user = $this->createMock(User::class);

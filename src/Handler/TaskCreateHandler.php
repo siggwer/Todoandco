@@ -58,7 +58,7 @@ class TaskCreateHandler
         if ($form->isSubmitted() && $form->isValid()) {
             $task->setUser($this->tokenStorage->getToken()->getUser());
 
-            $this->repository->save($task);
+            $this->repository->createTask($task);
 
             $this->messageFlash->getFlashBag()->add('success', 'La tâche a bien été ajoutée.');
 

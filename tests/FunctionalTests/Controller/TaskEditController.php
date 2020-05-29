@@ -14,6 +14,10 @@ class TaskEditController extends WebTestCase
 {
     use AuthenticationTrait;
 
+    /**
+     *
+     * 
+     */
     public function testEditTaskPageIsFound()
     {
         $client = static::createAuthenticatedClient();
@@ -53,7 +57,7 @@ class TaskEditController extends WebTestCase
     {
         $client = static::createClient();
 
-        $client->request('GET', '/tasks/edit/26');
+        $client->request('GET', '/tasks/edit/1');
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
@@ -79,7 +83,7 @@ class TaskEditController extends WebTestCase
     {
         $client = static::createAuthenticatedClient();
 
-        $client->request('POST', "/tasks/edit/77");
+        $client->request('POST', "/tasks/edit/1");
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
@@ -89,7 +93,7 @@ class TaskEditController extends WebTestCase
      */
     public function testTaskEditIfError()
     {
-        $client = static::createAuthenticatedClient();
+        $client = static::createClient();
 
         if (!$client) {
 

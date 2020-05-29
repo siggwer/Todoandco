@@ -42,7 +42,7 @@ class TaskRepository extends ServiceEntityRepository
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function save($task)
+    public function createTask($task)
     {
         $this->_em->persist($task);
         $this->_em->flush();

@@ -70,8 +70,6 @@ class TaskVoter extends Voter
      * @param User $user
      *
      * @return bool
-     *
-     * @codeCoverageIgnore
      */
     private function canEdit(Task $task, User $user): bool
     {
@@ -83,8 +81,6 @@ class TaskVoter extends Voter
      * @param User $user
      *
      * @return bool
-     *
-     * @codeCoverageIgnore
      */
     private function canDelete(Task $task, User $user): bool
     {

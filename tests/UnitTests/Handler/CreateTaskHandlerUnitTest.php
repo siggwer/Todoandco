@@ -60,7 +60,7 @@ class CreateTaskHandlerUnitTest extends TestCase
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function testHandleIfReturnTrue()
+    public function testCreateHandleIfReturnTrue()
     {
         $form = $this->createMock(FormInterface::class);
 
@@ -79,7 +79,7 @@ class CreateTaskHandlerUnitTest extends TestCase
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function testHandleIfReturnFalse()
+    public function testCreateHandleIfReturnFalse()
     {
         $form = $this->createMock(FormInterface::class);
 

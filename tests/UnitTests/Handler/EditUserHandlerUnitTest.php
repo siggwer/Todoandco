@@ -52,7 +52,7 @@ class EditUserHandlerUnitTest extends TestCase
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function testHandlerIfReturnTrue()
+    public function testEditUserHandlerIfReturnTrue()
     {
         $form = $this->createMock(FormInterface::class);
 
@@ -68,7 +68,7 @@ class EditUserHandlerUnitTest extends TestCase
      * @throws ORMException
      * @throws OptimisticLockException
      */
-    public function testHandlerIfReturnFalse()
+    public function testEditUserHandlerIfReturnFalse()
     {
         $form = $this->createMock(FormInterface::class);
 

@@ -2,23 +2,29 @@
 
 namespace App\Tests\FunctionalTests\Controller;
 
-use App\Tests\FunctionalTests\AuthenticatorLogin;
+
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\Tests\FunctionalTests\AuthenticationTrait;
 
 /**
  * Class DefaultController
  *
  * @package App\Tests\FunctionalTests\Controller
  */
-class DefaultController extends AuthenticatorLogin
+class DefaultController extends WebTestCase
 {
+    use AuthenticationTrait;
+
     /**
      *
      */
     public function testRedirectionIfNoLogin()
     {
-        $this->client->request('GET', '/');
+        $client = static::createClient();
 
-        $this->assertEquals(302, $this->client->getResponse()->getStatusCode());
+        $client->request('GET', '/');
+
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 
     /**
@@ -26,11 +32,11 @@ class DefaultController extends AuthenticatorLogin
      */
     public function testHomeIfLogin()
     {
-        $this->logInUser();
+        $client = static::createAuthenticatedClient();
 
-        $crawler = $this->client->request('GET', '/');
+        $crawler = $client->request('GET', '/');
 
-        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         $this->assertSame(1, $crawler->filter(
             'html:contains("Bienvenue sur Todo List, l\'application vous permettant de gérer l\'ensemble de vos tâches sans effort !")')->count());
