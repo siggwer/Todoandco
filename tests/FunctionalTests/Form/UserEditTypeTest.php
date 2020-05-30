@@ -18,7 +18,6 @@ class UserEditTypeTest extends TypeTestCase
      */
     public function testForm()
     {
-
         $formData = [
             'username' => 'test',
             'email' => 'test@test.com',

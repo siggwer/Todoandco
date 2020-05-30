@@ -117,17 +117,16 @@ class TaskEditController
             throw new AccessDeniedException();
         }
 
-            $form = $this->formFactory->create(TaskEditType::class, $task)
+        $form = $this->formFactory->create(TaskEditType::class, $task)
                 ->handleRequest($request);
 
-            if ($taskEditHandler->handle($form)) {
-
-                return new RedirectResponse(
+        if ($taskEditHandler->handle($form)) {
+            return new RedirectResponse(
                     $this->urlGenerator->generate('task_list'),
                     RedirectResponse::HTTP_FOUND
                 );
-            }
-            return new Response(
+        }
+        return new Response(
                 $this->twig->render(
                     'task/edit.html.twig',
                     [

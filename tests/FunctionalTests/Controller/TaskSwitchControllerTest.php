@@ -46,7 +46,6 @@ class TaskSwitchControllerTest extends WebTestCase
         $client = static::createAuthenticatedClient();
 
         if (!$client) {
-
             $client->request('GET', '/tasks/switch/11');
 
             $this->assertEquals(302, $client->getResponse()->getStatusCode());

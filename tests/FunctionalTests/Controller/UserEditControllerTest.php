@@ -2,7 +2,6 @@
 
 namespace App\Tests\FunctionalTests\Controller;
 
-
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use App\Tests\FunctionalTests\AuthenticationTrait;
 

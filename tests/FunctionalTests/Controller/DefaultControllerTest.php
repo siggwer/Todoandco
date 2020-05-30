@@ -2,7 +2,6 @@
 
 namespace App\Tests\FunctionalTests\Controller;
 
-
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use App\Tests\FunctionalTests\AuthenticationTrait;
 
@@ -39,6 +38,7 @@ class DefaultControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         $this->assertSame(1, $crawler->filter(
-            'html:contains("Bienvenue sur Todo List, l\'application vous permettant de gérer l\'ensemble de vos tâches sans effort !")')->count());
+            'html:contains("Bienvenue sur Todo List, l\'application vous permettant de gérer l\'ensemble de vos tâches sans effort !")'
+        )->count());
     }
 }

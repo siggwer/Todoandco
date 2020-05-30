@@ -50,7 +50,6 @@ class TaskEditHandler
     public function handle(FormInterface $form): bool
     {
         if ($form->isSubmitted() && $form->isValid()) {
-
             $this->repository->updateTask();
 
             $this->messageFlash->getFlashBag()->add('success', 'La tâche a bien été modifiée.');

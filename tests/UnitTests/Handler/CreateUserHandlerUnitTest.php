@@ -75,7 +75,6 @@ class CreateUserHandlerUnitTest extends TestCase
         if ($form->method('isValid')
                 ->willReturn(true) && $form->method('isSubmitted')
                 ->willReturn(true)) {
-
             $handler = new UserCreateHandler(
                 $this->repository,
                 $this->passwordEncoder,

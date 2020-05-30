@@ -30,11 +30,13 @@ class SecurityController extends AbstractController
 
         return new Response(
             $twig->render(
-                'security/login.html.twig', [
+                'security/login.html.twig',
+                [
                     'last_username' => $lastUsername,
                     'error'         => $error,
                 ]
-            ), Response::HTTP_OK
+            ),
+            Response::HTTP_OK
         );
     }
 

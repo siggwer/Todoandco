@@ -44,6 +44,5 @@ class UserCreateTypeTest extends TypeTestCase
         $this->assertEquals($user, $userToCompare);
 
         $this->assertInstanceOf(User::class, $form->getData());
-
     }
 }

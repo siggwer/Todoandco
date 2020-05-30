@@ -16,7 +16,7 @@ class TaskEditControllerTest extends WebTestCase
 
     /**
      *
-     * 
+     *
      */
     public function testEditTaskPageIsFound()
     {
@@ -96,7 +96,6 @@ class TaskEditControllerTest extends WebTestCase
         $client = static::createClient();
 
         if (!$client) {
-
             $client->request('POST', '/tasks/edit/25');
 
             $this->assertEquals(200, $client->getResponse()->getStatusCode());

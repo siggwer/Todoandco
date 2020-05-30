@@ -2,7 +2,6 @@
 
 namespace App\Controller\User;
 
-
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Form\FormFactoryInterface;

@@ -73,7 +73,6 @@ class EditPasswordHandlerUnitTest extends TestCase
         if ($form->method('isSubmitted')
                 ->willReturn(true) && $form->method('isValid')
                 ->willReturn(true)) {
-
             $handler = new UserEditPasswordHandler(
                 $this->repository,
                 $this->passwordEncoder,
