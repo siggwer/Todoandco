@@ -1,7 +1,10 @@
 # Todoandco
+
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/addb47cedadc4a5f9fe6f2eb8b18379e)](https://www.codacy.com/manual/siggwer/Todoandco?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=siggwer/Todoandco&amp;utm_campaign=Badge_Grade)
+
 Openclassrooms Project 8 Todo list
 
-![symfony](https://d1pwix07io15pr.cloudfront.net/vd3200fdf32/images/logos/header-logo.svg)
+![symfony](https://symfony.com/logos/symfony_white_02.svg)
 
 * Developped with the Symfony 4.4 framework
 * CSS : Bootstrap 4
@@ -64,9 +67,8 @@ Run application in your favorite browser
 
 # *Enjoy !!*
 
-[Security documentation](https://github.com/yohannzaoui/projet8_ToDo_and_Co/blob/master/docs/documents/symfony_security.pdf)
+[Security documentation]()
 
-[Quality Code documentation](https://github.com/yohannzaoui/projet8_ToDo_and_Co/blob/master/docs/documents/audit_qualit%C3%A9.pdf)
+[Quality Code documentation]()
 
-[Contribute to this project](https://github.com/yohannzaoui/projet8_ToDo_and_Co/blob/master/Contributing.md)
-
+[Contribute to this project]()
