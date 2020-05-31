@@ -1,4 +1,7 @@
 # Todoandco
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/72e5bbf52f734848a39cc434b6ec9176)](https://app.codacy.com/manual/siggwer/Todoandco?utm_source=github.com&utm_medium=referral&utm_content=siggwer/Todoandco&utm_campaign=Badge_Grade_Dashboard)
+
 Openclassrooms Project 8 Todo list
 
 ![symfony](https://symfony.com/logos/symfony_white_02.svg)
