@@ -67,9 +67,9 @@ Run application in your favorite browser
 
 # *Enjoy !!*
 
-[Security documentation](https://github.com/yohannzaoui/projet8_ToDo_and_Co/blob/master/docs/documents/symfony_security.pdf)
+[Security documentation]()
 
-[Quality Code documentation](https://github.com/yohannzaoui/projet8_ToDo_and_Co/blob/master/docs/documents/audit_qualit%C3%A9.pdf)
+[Quality Code documentation]()
 
-[Contribute to this project](https://github.com/yohannzaoui/projet8_ToDo_and_Co/blob/master/Contributing.md)
+[Contribute to this project]()
 
