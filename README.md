@@ -1,7 +1,7 @@
 # Todoandco
 Openclassrooms Project 8 Todo list
 
-![symfony](https://d1pwix07io15pr.cloudfront.net/vd3200fdf32/images/logos/header-logo.svg)
+![symfony](https://symfony.com/logos/symfony_white_02.svg)
 
 * Developped with the Symfony 4.4 framework
 * CSS : Bootstrap 4
