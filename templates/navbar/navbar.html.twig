@@ -1,0 +1,30 @@
+<div id="navbar-top">
+    <nav class="navbar navbar-expand-md navbar-light bg-white fixed-top background-nav" {{ app.session.flashbag.peek('success')|length > 0 ? '' : 'mb-5' }}>
+        <div class="container">
+            <a href="/"><img src="{{ asset('img/new_logo_oc.jpg') }}" alt="OpenClassrooms"/></a>
+            <a style="color: darkblue" class="navbar-brand nav-link" href="/">To do list</a>
+            <button class="navbar-toggler" type="button"
+                    data-toggle="collapse" data-target="#nav" aria-controls="nav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="nav">
+                <ul class="navbar-nav ml-auto">
+                    {% if is_granted("ROLE_ADMIN") %}
+                        <li class="nav-item dropdown">
+                            <a style="color: darkblue" class="nav-link" href="{{ path('user_list') }}">Gérer les utilisateurs</a>
+                        </li>
+                    {% endif %}
+                    <li>
+                        <a style="color: white" class="nav-link btn btn-primary" href="{{ path('user_create') }}">Créer un utilisateur</a>
+                    </li>
+                    <li>
+                        {% if app.user %}
+                            <a style="color: white" class="nav-link btn btn-danger" href="{{ path('security_logout') }}">Se déconnecter</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>

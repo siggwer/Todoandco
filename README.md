@@ -72,4 +72,3 @@ Run application in your favorite browser
 [Quality Code documentation]()
 
 [Contribute to this project]()
-

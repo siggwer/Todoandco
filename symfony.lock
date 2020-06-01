@@ -1,4 +1,16 @@
 {
+    "dama/doctrine-test-bundle": {
+        "version": "4.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "4.0",
+            "ref": "56eaa387b5e48ebcc7c95a893b47dfa1ad51449c"
+        },
+        "files": [
+            "./config/packages/test/dama_doctrine_test_bundle.yaml"
+        ]
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -20,6 +32,9 @@
     "doctrine/common": {
         "version": "2.12.0"
     },
+    "doctrine/data-fixtures": {
+        "version": "1.4.2"
+    },
     "doctrine/dbal": {
         "version": "2.10.2"
     },
@@ -36,6 +51,18 @@
             "./config/packages/prod/doctrine.yaml",
             "./src/Entity/.gitignore",
             "./src/Repository/.gitignore"
+        ]
+    },
+    "doctrine/doctrine-fixtures-bundle": {
+        "version": "3.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.0",
+            "ref": "fc52d86631a6dfd9fdf3381d0b7e3df2069e51b3"
+        },
+        "files": [
+            "./src/DataFixtures/AppFixtures.php"
         ]
     },
     "doctrine/doctrine-migrations-bundle": {
@@ -78,6 +105,9 @@
     "egulias/email-validator": {
         "version": "2.1.17"
     },
+    "fzaninotto/faker": {
+        "version": "v1.9.1"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
@@ -94,7 +124,7 @@
         "version": "2.2.3"
     },
     "php": {
-        "version": "7.3"
+        "version": "7.4"
     },
     "phpdocumentor/reflection-common": {
         "version": "2.0.0"
@@ -104,6 +134,9 @@
     },
     "phpdocumentor/type-resolver": {
         "version": "1.1.0"
+    },
+    "predis/predis": {
+        "version": "v1.1.1"
     },
     "psr/cache": {
         "version": "1.0.1"
@@ -127,6 +160,18 @@
         },
         "files": [
             "./config/packages/sensio_framework_extra.yaml"
+        ]
+    },
+    "snc/redis-bundle": {
+        "version": "2.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.0",
+            "ref": "85bbdb3d2db531e20874de29bab0587f93604fa8"
+        },
+        "files": [
+            "./config/packages/snc_redis.yaml"
         ]
     },
     "symfony/asset": {
@@ -322,6 +367,9 @@
             "./phpunit.xml.dist",
             "./tests/bootstrap.php"
         ]
+    },
+    "symfony/polyfill-apcu": {
+        "version": "v1.16.0"
     },
     "symfony/polyfill-intl-icu": {
         "version": "v1.15.0"

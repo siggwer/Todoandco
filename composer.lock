@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f8f9e9e6997f9c08a717b9a36f1cf1b4",
+    "content-hash": "48649d5200febb0ada60f290d2e6895a",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1611,6 +1611,56 @@
             "time": "2020-02-18T18:59:58+00:00"
         },
         {
+            "name": "predis/predis",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nrk/predis.git",
+                "reference": "f0210e38881631afeafb56ab43405a92cafd9fd1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nrk/predis/zipball/f0210e38881631afeafb56ab43405a92cafd9fd1",
+                "reference": "f0210e38881631afeafb56ab43405a92cafd9fd1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8"
+            },
+            "suggest": {
+                "ext-curl": "Allows access to Webdis when paired with phpiredis",
+                "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Predis\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniele Alessandri",
+                    "email": "suppakilla@gmail.com",
+                    "homepage": "http://clorophilla.net"
+                }
+            ],
+            "description": "Flexible and feature-complete Redis client for PHP and HHVM",
+            "homepage": "http://github.com/nrk/predis",
+            "keywords": [
+                "nosql",
+                "predis",
+                "redis"
+            ],
+            "time": "2016-06-16T16:22:20+00:00"
+        },
+        {
             "name": "psr/cache",
             "version": "1.0.1",
             "source": {
@@ -1873,6 +1923,85 @@
                 "controllers"
             ],
             "time": "2020-04-06T12:20:39+00:00"
+        },
+        {
+            "name": "snc/redis-bundle",
+            "version": "3.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/snc/SncRedisBundle.git",
+                "reference": "7d9294b2f90d39a0e2120c6f35a017895482416b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/snc/SncRedisBundle/zipball/7d9294b2f90d39a0e2120c6f35a017895482416b",
+                "reference": "7d9294b2f90d39a0e2120c6f35a017895482416b",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3",
+                "symfony/framework-bundle": "^3.4 || ^4.2 || ^5.0",
+                "symfony/http-foundation": "^3.4 || ^4.2 || ^5.0",
+                "symfony/yaml": "^3.4 || ^4.2 || ^5.0"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "^1.11.2 || ^2.0",
+                "doctrine/orm": "^2.6.4",
+                "ext-pdo_sqlite": "*",
+                "phpunit/phpunit": "^7.5",
+                "predis/predis": "^1.1",
+                "swiftmailer/swiftmailer": "^6.0",
+                "symfony/browser-kit": "^3.4 || ^4.2 || ^5.0",
+                "symfony/console": "^3.4 || ^4.2 || ^5.0",
+                "symfony/dom-crawler": "^3.4 || ^4.2 || ^5.0",
+                "symfony/filesystem": "^3.4 || ^4.2 || ^5.0",
+                "symfony/phpunit-bridge": "^4.3.5",
+                "symfony/profiler-pack": "^1.0",
+                "symfony/swiftmailer-bundle": "^2.0 || ^3.0",
+                "symfony/twig-bundle": "^3.4 || ^4.2 || ^5.0"
+            },
+            "suggest": {
+                "monolog/monolog": "If you want to use the monolog redis handler.",
+                "predis/predis": "If you want to use predis.",
+                "symfony/console": "If you want to use commands to interact with the redis database",
+                "symfony/proxy-manager-bridge": "If you want to lazy-load some services"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Snc\\RedisBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Henrik Westphal",
+                    "email": "henrik.westphal@gmail.com"
+                },
+                {
+                    "name": "Community contributors",
+                    "homepage": "https://github.com/snc/SncRedisBundle/contributors"
+                }
+            ],
+            "description": "A Redis bundle for Symfony",
+            "homepage": "https://github.com/snc/SncRedisBundle",
+            "keywords": [
+                "nosql",
+                "redis",
+                "symfony"
+            ],
+            "time": "2020-04-30T05:56:02+00:00"
         },
         {
             "name": "symfony/asset",
@@ -3898,6 +4027,76 @@
             ],
             "description": "A pack for the Doctrine ORM",
             "time": "2020-02-10T18:03:48+00:00"
+        },
+        {
+            "name": "symfony/polyfill-apcu",
+            "version": "v1.16.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-apcu.git",
+                "reference": "6a50331d18fa2c1bcf8bf60e4f4a2260e1ec3a1c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-apcu/zipball/6a50331d18fa2c1bcf8bf60e4f4a2260e1ec3a1c",
+                "reference": "6a50331d18fa2c1bcf8bf60e4f4a2260e1ec3a1c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.16-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Apcu\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill backporting apcu_* functions to lower PHP versions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "apcu",
+                "compatibility",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2020-05-08T16:50:20+00:00"
         },
         {
             "name": "symfony/polyfill-intl-icu",
@@ -6142,6 +6341,245 @@
     ],
     "packages-dev": [
         {
+            "name": "dama/doctrine-test-bundle",
+            "version": "v6.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dmaicher/doctrine-test-bundle.git",
+                "reference": "06932e828b4e8ed8655b9b64ae30428e048b616e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dmaicher/doctrine-test-bundle/zipball/06932e828b4e8ed8655b9b64ae30428e048b616e",
+                "reference": "06932e828b4e8ed8655b9b64ae30428e048b616e",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "^2.9,>=2.9.3",
+                "doctrine/doctrine-bundle": "^1.11 || ^2.0",
+                "php": "^7.1",
+                "symfony/framework-bundle": "^3.4 || ^4.3 || ^5.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^0.12",
+                "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0",
+                "symfony/phpunit-bridge": "^4.3 || ^5.0",
+                "symfony/yaml": "^3.4 || ^4.3 || ^5.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "7.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "DAMA\\DoctrineTestBundle\\": "src/DAMA/DoctrineTestBundle"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David Maicher",
+                    "email": "mail@dmaicher.de"
+                }
+            ],
+            "description": "Symfony bundle to isolate doctrine database tests and improve test performance",
+            "keywords": [
+                "doctrine",
+                "isolation",
+                "performance",
+                "symfony",
+                "tests"
+            ],
+            "time": "2020-03-02T20:42:23+00:00"
+        },
+        {
+            "name": "doctrine/data-fixtures",
+            "version": "1.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/data-fixtures.git",
+                "reference": "39e9777c9089351a468f780b01cffa3cb0a42907"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/39e9777c9089351a468f780b01cffa3cb0a42907",
+                "reference": "39e9777c9089351a468f780b01cffa3cb0a42907",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/common": "^2.11",
+                "doctrine/persistence": "^1.3.3",
+                "php": "^7.2"
+            },
+            "conflict": {
+                "doctrine/phpcr-odm": "<1.3.0"
+            },
+            "require-dev": {
+                "alcaeus/mongo-php-adapter": "^1.1",
+                "doctrine/coding-standard": "^6.0",
+                "doctrine/dbal": "^2.5.4",
+                "doctrine/mongodb-odm": "^1.3.0",
+                "doctrine/orm": "^2.7.0",
+                "phpunit/phpunit": "^7.0"
+            },
+            "suggest": {
+                "alcaeus/mongo-php-adapter": "For using MongoDB ODM with PHP 7",
+                "doctrine/mongodb-odm": "For loading MongoDB ODM fixtures",
+                "doctrine/orm": "For loading ORM fixtures",
+                "doctrine/phpcr-odm": "For loading PHPCR ODM fixtures"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\Common\\DataFixtures\\": "lib/Doctrine/Common/DataFixtures"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com"
+                }
+            ],
+            "description": "Data Fixtures for all Doctrine Object Managers",
+            "homepage": "http://www.doctrine-project.org",
+            "keywords": [
+                "database"
+            ],
+            "time": "2020-01-17T11:11:28+00:00"
+        },
+        {
+            "name": "doctrine/doctrine-fixtures-bundle",
+            "version": "3.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/DoctrineFixturesBundle.git",
+                "reference": "39defca57ee0949e1475c46177b30b6d1b732e8f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/DoctrineFixturesBundle/zipball/39defca57ee0949e1475c46177b30b6d1b732e8f",
+                "reference": "39defca57ee0949e1475c46177b30b6d1b732e8f",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/data-fixtures": "^1.3",
+                "doctrine/doctrine-bundle": "^1.11|^2.0",
+                "doctrine/orm": "^2.6.0",
+                "doctrine/persistence": "^1.3",
+                "php": "^7.1",
+                "symfony/config": "^3.4|^4.3|^5.0",
+                "symfony/console": "^3.4|^4.3|^5.0",
+                "symfony/dependency-injection": "^3.4|^4.3|^5.0",
+                "symfony/doctrine-bridge": "^3.4|^4.1|^5.0",
+                "symfony/http-kernel": "^3.4|^4.3|^5.0"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "^6.0",
+                "phpunit/phpunit": "^7.4",
+                "symfony/phpunit-bridge": "^4.1|^5.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\Bundle\\FixturesBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Doctrine Project",
+                    "homepage": "http://www.doctrine-project.org"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony DoctrineFixturesBundle",
+            "homepage": "http://www.doctrine-project.org",
+            "keywords": [
+                "Fixture",
+                "persistence"
+            ],
+            "time": "2020-04-02T16:40:37+00:00"
+        },
+        {
+            "name": "fzaninotto/faker",
+            "version": "v1.9.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fzaninotto/Faker.git",
+                "reference": "fc10d778e4b84d5bd315dad194661e091d307c6f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/fc10d778e4b84d5bd315dad194661e091d307c6f",
+                "reference": "fc10d778e4b84d5bd315dad194661e091d307c6f",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3.3 || ^7.0"
+            },
+            "require-dev": {
+                "ext-intl": "*",
+                "phpunit/phpunit": "^4.8.35 || ^5.7",
+                "squizlabs/php_codesniffer": "^2.9.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.9-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Faker\\": "src/Faker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Zaninotto"
+                }
+            ],
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "keywords": [
+                "data",
+                "faker",
+                "fixtures"
+            ],
+            "time": "2019-12-12T13:22:17+00:00"
+        },
+        {
             "name": "nikic/php-parser",
             "version": "v4.4.0",
             "source": {
@@ -6195,7 +6633,7 @@
         },
         {
             "name": "symfony/browser-kit",
-            "version": "v4.4.7",
+            "version": "v4.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/browser-kit.git",
@@ -6268,7 +6706,7 @@
         },
         {
             "name": "symfony/css-selector",
-            "version": "v4.4.7",
+            "version": "v4.4.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
