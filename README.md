@@ -67,8 +67,10 @@ Run application in your favorite browser
 
 # *Enjoy !!*
 
-[Security documentation]()
+[Security documentation](https://github.com/siggwer/Todoandco/blob/master/docs/audit/S%C3%A9curit%C3%A9/Documentation_securit%C3%A9_de_symfony.pdf)
 
-[Quality Code documentation]()
+[Audit Code documentation](https://github.com/siggwer/Todoandco/blob/master/docs/audit/Qualite_et_performance/Audit%20de%20qualit%C3%A9.pdf)
 
-[Contribute to this project]()
+[Improvement documentation](https://github.com/siggwer/Todoandco/blob/master/docs/audit/Qualite_et_performance/Audit_de_qualite_et_amelioration.pdf)
+
+[Contribute to this project](https://github.com/siggwer/Todoandco/blob/master/CONTRIBUTING.md)
