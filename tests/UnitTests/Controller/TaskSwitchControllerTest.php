@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\Session;
-use App\Controller\TaskSwitchController;
+use App\Controller\Task\TaskSwitchController;
 use App\Repository\TaskRepository;
 use PHPUnit\Framework\TestCase;
 use App\Entity\Task;

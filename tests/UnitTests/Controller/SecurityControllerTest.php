@@ -4,7 +4,7 @@ namespace App\Tests\UnitTests\Controller;
 
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\HttpFoundation\Response;
-use App\Controller\SecurityController;
+use App\Controller\Security\SecurityController;
 use PHPUnit\Framework\TestCase;
 use Twig\Environment;
 

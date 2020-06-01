@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormInterface;
-use App\Controller\UserEditController;
+use App\Controller\User\UserEditController;
 use App\Repository\UserRepository;
 use App\Handler\UserEditHandler;
 use PHPUnit\Framework\TestCase;

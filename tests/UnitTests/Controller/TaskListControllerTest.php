@@ -3,7 +3,7 @@
 namespace App\Tests\UnitTests\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
-use App\Controller\TaskListController;
+use App\Controller\Task\TaskListController;
 use App\Repository\TaskRepository;
 use PHPUnit\Framework\TestCase;
 use Twig_Error_Runtime;

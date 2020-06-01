@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormInterface;
-use App\Controller\UserCreateController;
+use App\Controller\User\UserCreateController;
 use App\Repository\UserRepository;
 use App\Handler\UserCreateHandler;
 use PHPUnit\Framework\TestCase;

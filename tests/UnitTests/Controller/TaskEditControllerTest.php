@@ -11,7 +11,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\FormInterface;
-use App\Controller\TaskEditController;
+use App\Controller\Task\TaskEditController;
 use App\Repository\TaskRepository;
 use App\Handler\TaskEditHandler;
 use PHPUnit\Framework\TestCase;

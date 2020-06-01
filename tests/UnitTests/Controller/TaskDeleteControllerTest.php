@@ -12,7 +12,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\FormInterface;
 use Doctrine\ORM\OptimisticLockException;
-use App\Controller\TaskDeleteController;
+use App\Controller\Task\TaskDeleteController;
 use App\Repository\TaskRepository;
 use PHPUnit\Framework\TestCase;
 use Doctrine\ORM\ORMException;

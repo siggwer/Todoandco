@@ -3,7 +3,7 @@
 namespace App\Tests\UnitTests\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
-use App\Controller\UserListController;
+use App\Controller\User\UserListController;
 use App\Repository\UserRepository;
 use PHPUnit\Framework\TestCase;
 use Twig\Environment;

@@ -3,7 +3,7 @@
 namespace App\Tests\UnitTests\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
-use App\Controller\DefaultContoller;
+use App\Controller\Home\DefaultContoller;
 use PHPUnit\Framework\TestCase;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
